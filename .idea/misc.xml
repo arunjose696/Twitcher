@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/activity_main.xml" value="0.17291666666666666" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.23596014492753623" />
+        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/add_bird.xml" value="0.1" />
+        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/list_birds.xml" value="0.1" />
       </map>
     </option>
   </component>
