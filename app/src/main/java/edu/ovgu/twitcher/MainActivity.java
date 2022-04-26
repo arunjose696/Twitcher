@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.add_btn:
                 setContentView(R.layout.add_bird);
+                break;
             case R.id.button2:
                 setContentView(R.layout.list_birds);
 
