@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Twitcher</string>
+    <string name="add_bird_title">Add a new bird spotted</string>
+    <string name="List_bird_title">All birds spotted</string>
 </resources>
