@@ -3,12 +3,19 @@ package edu.ovgu.twitcher;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
@@ -17,13 +24,16 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
 
 
     private DatePickerDialog datePickerDialog;
-    private Button dateButton;
+    private TextInputEditText dateInput;
+    private Switch additionalOptionsSwitch;
+    private TextInputLayout additionalOptionLayout;
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.datePickerButton:
+            case R.id.dateInput:
                 Toast.makeText(this, "there I am", Toast.LENGTH_SHORT).show();
+                openDatePicker(view);
 
 
         }
@@ -34,9 +44,28 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_bird);
         initDatePicker();
-        dateButton = findViewById(R.id.datePickerButton);
-        dateButton.setText(getTodaysDate());
-        dateButton.setOnClickListener(this);
+        dateInput = findViewById(R.id.dateInput);
+        dateInput.setText(getTodaysDate());
+        dateInput.setOnClickListener(this);
+        additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
+        additionalOptionLayout=findViewById(R.id.AdditionalOptions);
+        Log.i("Yeah" , "999999999999999999999999999999999");
+        additionalOptionsSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        Log.i("Yeah" , "Is Not Selected");
+                        if(additionalOptionLayout.getVisibility()== View.GONE){
+                        additionalOptionLayout.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            additionalOptionLayout.setVisibility(View.GONE);
+                        }
+
+                        // how do i toggle visibility of mExplanation text in my QuizActivity.java from here?
+                    }
+                }
+        );
 
 
     }
@@ -50,7 +79,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
             {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
-                dateButton.setText(date);
+                dateInput.setText(date);
             }
         };
 
