@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/drawable/ic_baseline_cruelty_free_24.xml" value="0.1" />
+        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/drawable/ic_baseline_note_add_24.xml" value="0.1" />
+        <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/add_bird.xml" value="0.1" />
         <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/list_birds.xml" value="0.1" />
