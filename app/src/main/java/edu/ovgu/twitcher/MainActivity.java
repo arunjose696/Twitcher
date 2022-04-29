@@ -2,6 +2,7 @@ package edu.ovgu.twitcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.add_btn:
                 setContentView(R.layout.add_bird);
+                Intent intent= new Intent(MainActivity.this,AddBird.class);
+                startActivity(intent);
                 break;
             case R.id.button2:
                 setContentView(R.layout.list_birds);
