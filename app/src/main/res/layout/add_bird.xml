@@ -61,9 +61,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:hint="Date spotted"
-
-
-
                 app:startIconDrawable="@drawable/date">
 
                 <com.google.android.material.textfield.TextInputEditText
