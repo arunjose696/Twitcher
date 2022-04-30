@@ -8,6 +8,7 @@
     tools:context=".AddBird">
 
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,6 +25,8 @@
                 android:layout_gravity="center_horizontal"
                 app:cardBackgroundColor="@color/white">
 
+
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="145dp"
                     android:layout_height="144dp"
@@ -31,10 +34,21 @@
                     android:layout_gravity="center">
 
                     <ImageView
+                        android:id="@+id/BirdImage"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:src="@drawable/twitcher"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        android:visibility="invisible"/>
+
+                    <androidx.camera.view.PreviewView
+                        android:id="@+id/viewFinder"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="133dp"
+                        android:visibility="visible">
+                    </androidx.camera.view.PreviewView>
 
                 </androidx.cardview.widget.CardView>
 
