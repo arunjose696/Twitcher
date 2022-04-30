@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private TextInputEditText dateInput;
     private Switch additionalOptionsSwitch;
     private TextInputLayout additionalOptionLayout;
+    private ImageView imageView;
 
     @Override
     public void onClick(View view) {
@@ -45,6 +47,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         setContentView(R.layout.add_bird);
         initDatePicker();
         dateInput = findViewById(R.id.dateInput);
+        imageView=findViewById(R.id.BirdImage);
         dateInput.setText(getTodaysDate());
         dateInput.setOnClickListener(this);
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
@@ -54,6 +57,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        Classifier.classify(imageView,getApplicationContext());
                         Log.i("Yeah" , "Is Not Selected");
                         if(additionalOptionLayout.getVisibility()== View.GONE){
                         additionalOptionLayout.setVisibility(View.VISIBLE);
