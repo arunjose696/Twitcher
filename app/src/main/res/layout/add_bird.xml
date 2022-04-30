@@ -39,7 +39,7 @@
                         android:layout_height="150dp"
                         android:src="@drawable/twitcher"
                         android:scaleType="centerCrop"
-                        android:visibility="invisible"/>
+                        android:visibility="visible"/>
 
                     <androidx.camera.view.PreviewView
                         android:id="@+id/viewFinder"
@@ -47,7 +47,7 @@
                         android:layout_height="150dp"
                         tools:layout_editor_absoluteX="0dp"
                         tools:layout_editor_absoluteY="133dp"
-                        android:visibility="visible">
+                        android:visibility="invisible">
                     </androidx.camera.view.PreviewView>
 
                 </androidx.cardview.widget.CardView>
@@ -63,6 +63,7 @@
                 app:startIconDrawable="@drawable/bunny">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>

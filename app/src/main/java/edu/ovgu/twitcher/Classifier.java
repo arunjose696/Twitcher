@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.label.Category;
 
@@ -17,7 +19,7 @@ import edu.ovgu.twitcher.ml.LiteModelAiyVisionClassifierBirdsV13;
 
 public class Classifier {
 
-    public static void classify(ImageView imageView,Context context){
+    public static void classify(ImageView imageView, Context context, TextInputEditText inputName){
         try {
 
             LiteModelAiyVisionClassifierBirdsV13 model = LiteModelAiyVisionClassifierBirdsV13.newInstance(context);
@@ -30,7 +32,8 @@ public class Classifier {
             // Runs model inference and gets result.
             LiteModelAiyVisionClassifierBirdsV13.Outputs outputs = model.process(image);
             List<Category> probability = outputs.getProbabilityAsCategoryList();
-            Log.i("0000000000000000000000" , probability.get(0).getLabel());
+            inputName.setText( probability.get(0).getLabel());
+            Log.i("0000000000000000000000" , probability.get(1).getLabel());
             // Releases model resources if no longer used.
             model.close();
         } catch (IOException e) {

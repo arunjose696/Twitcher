@@ -1,7 +1,11 @@
 package edu.ovgu.twitcher;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +17,13 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -26,9 +35,15 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
 
     private DatePickerDialog datePickerDialog;
     private TextInputEditText dateInput;
+    private TextInputEditText inputName;
     private Switch additionalOptionsSwitch;
     private TextInputLayout additionalOptionLayout;
     private ImageView imageView;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int CAMERA_ACTION_CODE=1;
+    private FloatingActionButton cameraButton;
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     public void onClick(View view) {
@@ -41,23 +56,65 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         }
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,  int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_PERMISSION_CODE)
+        {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                activityResultLauncher.launch(cameraIntent);
+            }
+            else
+            {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_bird);
         initDatePicker();
         dateInput = findViewById(R.id.dateInput);
+        inputName=findViewById(R.id.inputName);
         imageView=findViewById(R.id.BirdImage);
         dateInput.setText(getTodaysDate());
         dateInput.setOnClickListener(this);
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
         additionalOptionLayout=findViewById(R.id.AdditionalOptions);
+        cameraButton=findViewById(R.id.floating_action_button);
         Log.i("Yeah" , "999999999999999999999999999999999");
+
+        cameraButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                }
+                else
+                {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    activityResultLauncher.launch(cameraIntent);
+                }
+            }
+        });
+
+
+
         additionalOptionsSwitch.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        Classifier.classify(imageView,getApplicationContext());
+                        Classifier.classify(imageView,getApplicationContext(), inputName);
                         Log.i("Yeah" , "Is Not Selected");
                         if(additionalOptionLayout.getVisibility()== View.GONE){
                         additionalOptionLayout.setVisibility(View.VISIBLE);
@@ -70,6 +127,21 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                     }
                 }
         );
+
+        activityResultLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if(result.getResultCode()==RESULT_OK && result.getData()!=null){
+
+                    Bundle bundle= result.getData().getExtras();
+                    Bitmap bitmap = (Bitmap) bundle.get("data");
+
+                    imageView.setImageBitmap(bitmap);
+
+                    Classifier.classify(imageView,getApplicationContext(),inputName);
+                }
+            }
+        });
 
 
     }
