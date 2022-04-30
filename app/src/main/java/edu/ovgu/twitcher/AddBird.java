@@ -27,6 +27,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private TextInputEditText dateInput;
     private Switch additionalOptionsSwitch;
     private TextInputLayout additionalOptionLayout;
+    private TextInputLayout dropdownLayout;
 
     @Override
     public void onClick(View view) {
@@ -49,6 +50,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         dateInput.setOnClickListener(this);
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
         additionalOptionLayout=findViewById(R.id.AdditionalOptions);
+        dropdownLayout=findViewById(R.id.list_dropdown);
         Log.i("Yeah" , "999999999999999999999999999999999");
         additionalOptionsSwitch.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
@@ -56,10 +58,12 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         Log.i("Yeah" , "Is Not Selected");
                         if(additionalOptionLayout.getVisibility()== View.GONE){
-                        additionalOptionLayout.setVisibility(View.VISIBLE);
+                            additionalOptionLayout.setVisibility(View.VISIBLE);
+                            dropdownLayout.setVisibility(View.VISIBLE);
                         }
                         else{
                             additionalOptionLayout.setVisibility(View.GONE);
+                            dropdownLayout.setVisibility(View.GONE);
                         }
 
                         // how do i toggle visibility of mExplanation text in my QuizActivity.java from here?
