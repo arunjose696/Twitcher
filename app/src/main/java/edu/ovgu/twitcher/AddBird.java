@@ -93,7 +93,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
         additionalOptionLayout=findViewById(R.id.AdditionalOptions);
 
-        cameraButton=findViewById(R.id.floating_action_button);
+        cameraButton=findViewById(R.id.camera_btn);
 
         dropdownLayout=findViewById(R.id.list_dropdown);
 

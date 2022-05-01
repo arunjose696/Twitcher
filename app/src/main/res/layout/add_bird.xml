@@ -42,6 +42,7 @@
                     android:layout_width="145dp"
                     android:layout_height="144dp"
                     app:cardCornerRadius="250dp"
+
                     android:layout_gravity="center">
 
                     <ImageView
@@ -61,7 +62,22 @@
                         android:visibility="invisible">
                     </androidx.camera.view.PreviewView>
 
+
+
                 </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/camera_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="12dp"
+                    app:borderWidth="0dp"
+                    android:backgroundTint="#A042F3"
+                    android:contentDescription="@string/bottom_sheet_behavior"
+                    app:fabSize="mini"
+                    android:elevation="2dp"
+                    app:srcCompat="@drawable/camera"/>
 
             </androidx.cardview.widget.CardView>
 
