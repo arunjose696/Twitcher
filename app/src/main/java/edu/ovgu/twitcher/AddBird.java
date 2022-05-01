@@ -38,12 +38,16 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private TextInputEditText inputName;
     private Switch additionalOptionsSwitch;
     private TextInputLayout additionalOptionLayout;
+
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST = 1888;
     private static final int CAMERA_ACTION_CODE=1;
     private FloatingActionButton cameraButton;
     ActivityResultLauncher<Intent> activityResultLauncher;
+
+    private TextInputLayout dropdownLayout;
+
 
     @Override
     public void onClick(View view) {
@@ -88,7 +92,11 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         dateInput.setOnClickListener(this);
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
         additionalOptionLayout=findViewById(R.id.AdditionalOptions);
+
         cameraButton=findViewById(R.id.floating_action_button);
+
+        dropdownLayout=findViewById(R.id.list_dropdown);
+
         Log.i("Yeah" , "999999999999999999999999999999999");
 
         cameraButton.setOnClickListener(new View.OnClickListener()
@@ -117,10 +125,12 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                         Classifier.classify(imageView,getApplicationContext(), inputName);
                         Log.i("Yeah" , "Is Not Selected");
                         if(additionalOptionLayout.getVisibility()== View.GONE){
-                        additionalOptionLayout.setVisibility(View.VISIBLE);
+                            additionalOptionLayout.setVisibility(View.VISIBLE);
+                            dropdownLayout.setVisibility(View.VISIBLE);
                         }
                         else{
                             additionalOptionLayout.setVisibility(View.GONE);
+                            dropdownLayout.setVisibility(View.GONE);
                         }
 
                         // how do i toggle visibility of mExplanation text in my QuizActivity.java from here?
