@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button2:
                 setContentView(R.layout.list_birds);
+                Intent intent2= new Intent(MainActivity.this,ListBirds.class);
+                startActivity(intent2);
 
 
         }
