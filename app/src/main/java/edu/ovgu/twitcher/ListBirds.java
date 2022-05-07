@@ -53,6 +53,13 @@ public class ListBirds extends AppCompatActivity {
         birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird2"));
         birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird3"));
         birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird4"));
+
+        birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird4"));
+        birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird4"));
+        birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird4"));
+        birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird4"));
+        birdList.add(new ListBirdsRecycler(R.drawable.twitcher, "Bird4"));
+
     }
 
 }

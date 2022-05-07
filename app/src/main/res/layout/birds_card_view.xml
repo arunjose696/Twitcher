@@ -13,13 +13,12 @@
             android:layout_height="60dp"
             android:id="@+id/img_view"
             app:cardCornerRadius="70dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp">
 
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/twitcher"
                 android:id="@+id/img">
@@ -37,7 +36,7 @@
             android:id="@+id/name"
             android:layout_toRightOf="@+id/img_view"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="27dp">
+            android:layout_marginTop="17dp">
 
         </TextView>
 
