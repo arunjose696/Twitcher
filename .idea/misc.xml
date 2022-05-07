@@ -15,9 +15,10 @@
         <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/add_bird.xml" value="0.1" />
         <entry key="..\:/Users/arunj/AndroidStudioProjects/Twitcher/app/src/main/res/layout/list_birds.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/border.xml" value="0.1465" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14920906370243694" />
         <entry key="app/src/main/res/layout/add_bird.xml" value="0.2887294216969185" />
-        <entry key="app/src/main/res/layout/birds_card_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/birds_card_view.xml" value="0.18" />
         <entry key="app/src/main/res/layout/list_birds.xml" value="0.29243266353142366" />
       </map>
     </option>
