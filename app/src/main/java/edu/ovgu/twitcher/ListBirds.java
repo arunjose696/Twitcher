@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,24 @@ public class ListBirds extends AppCompatActivity {
         adapter = new Adapter(birdList);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                 Toast.makeText(ListBirds.this, position+ " is selected successfully", Toast.LENGTH_SHORT).show();
+
+                //handle click event
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+
     }
 
     private void initData() {
