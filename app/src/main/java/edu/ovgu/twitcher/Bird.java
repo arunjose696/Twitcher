@@ -1,10 +1,10 @@
 package edu.ovgu.twitcher;
 
-public class ListBirdsRecycler {
+public class Bird {
     private int imageView;
     private String birdName;
 
-    ListBirdsRecycler(int imageView, String birdName ) {
+    Bird(int imageView, String birdName ) {
         this.imageView = imageView;
         this.birdName = birdName;
     }

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-    private List<ListBirdsRecycler> birdList;
+    private List<Bird> birdList;
 
-    public Adapter(List<ListBirdsRecycler>birdList) {
+    public Adapter(List<Bird>birdList) {
         this.birdList = birdList;
     }
     @NonNull
