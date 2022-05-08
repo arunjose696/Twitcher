@@ -6,6 +6,16 @@ public class Bird {
     private int imageView;
     private String birdName;
     private Date date;
+
+    public Bird(int imageView, String birdName, Date date, String wikiLink, String category, String notes) {
+        this.imageView = imageView;
+        this.birdName = birdName;
+        this.date = date;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.notes = notes;
+    }
+
     private String wikiLink,category,notes;
 
     public void setImageView(int imageView) {
