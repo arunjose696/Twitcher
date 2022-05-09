@@ -92,10 +92,8 @@ public class BirdRepository {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference docRef) {
-                        uploadImage(docRef.getId());
+                        uploadImage(bird.getBirdName()+docRef.getId());
                         Log.d("BirdRepo", "DocumentSnapshot added with ID: " + docRef.getId());
-
-
 
 
 
