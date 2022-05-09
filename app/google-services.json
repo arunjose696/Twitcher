@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "197798677256",
+    "project_id": "twitcher-9291b",
+    "storage_bucket": "twitcher-9291b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197798677256:android:bbf661243b005d52657abd",
+        "android_client_info": {
+          "package_name": "edu.ovgu.twitcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197798677256-stbvr137kck50lt5q0ctt3o9o7je16b5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTnqX8uBX1cV329X4LesV_MP9utjPRbBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197798677256-stbvr137kck50lt5q0ctt3o9o7je16b5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

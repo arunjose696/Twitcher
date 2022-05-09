@@ -3,9 +3,12 @@ package edu.ovgu.twitcher;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,12 +24,19 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 
 public class AddBird extends AppCompatActivity  implements View.OnClickListener
@@ -45,8 +55,15 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private static final int CAMERA_ACTION_CODE=1;
     private FloatingActionButton cameraButton;
     ActivityResultLauncher<Intent> activityResultLauncher;
-
     private TextInputLayout dropdownLayout;
+
+
+    //add bird code
+
+    ProgressDialog pd;
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://twitcher-9291b.appspot.com");
 
 
     @Override
@@ -98,6 +115,9 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         dropdownLayout=findViewById(R.id.list_dropdown);
 
         Log.i("Yeah" , "999999999999999999999999999999999");
+        //Code for uploading image
+        pd = new ProgressDialog(this);
+        pd.setMessage("Uploading....");
 
         cameraButton.setOnClickListener(new View.OnClickListener()
         {
@@ -124,6 +144,43 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         Classifier.classify(imageView,getApplicationContext(), inputName);
                         Log.i("Yeah" , "Is Not Selected");
+
+                        //code for uploading image
+                        StorageReference mountainsRef = storageRef.child(inputName.getText()+".jpg");
+
+
+                        imageView.setDrawingCacheEnabled(true);
+                        imageView.buildDrawingCache();
+                        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] data = baos.toByteArray();
+
+                        UploadTask uploadTask = mountainsRef.putBytes(data);
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle unsuccessful uploads
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Uri downloadUrl = uri;
+                                        Log.i("download:URL",downloadUrl.toString());
+                                        //Do what you want with the url
+                                    }});
+                                Toast.makeText(AddBird.this,"Image uploaded successfully",Toast.LENGTH_SHORT).show();;
+                            }
+                        });
+
+
+
+
+
+
                         if(additionalOptionLayout.getVisibility()== View.GONE){
                             additionalOptionLayout.setVisibility(View.VISIBLE);
                             dropdownLayout.setVisibility(View.VISIBLE);
