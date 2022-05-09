@@ -3,6 +3,17 @@ package edu.ovgu.twitcher;
 import java.util.Date;
 
 public class Bird {
+    private String id;
+    public static final String COLLECTION = "birds";
+    public static final String FIELD_birdId = "birdId";
+    public static final String FIELD_name = "name";
+    public static final String FIELD_notes = "notes";
+    public static final String FIELD_date = "date";
+    public static final String FIELD_wikiLink = "wikiLink";
+    public static final String FIELD_time = "time";
+
+
+
     private int imageView;
     private String birdName;
     private Date date;
@@ -52,6 +63,14 @@ public class Bird {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setNotes(String notes) {
