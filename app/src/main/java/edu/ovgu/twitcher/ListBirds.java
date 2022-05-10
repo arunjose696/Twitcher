@@ -1,15 +1,24 @@
 package edu.ovgu.twitcher;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.ovgu.twitcher.repository.BirdRepository;
 
 public class ListBirds extends AppCompatActivity {
 
@@ -57,16 +66,25 @@ public class ListBirds extends AppCompatActivity {
 
     private void initData() {
         birdList = new ArrayList<>();
-        birdList.add(new Bird(R.drawable.twitcher, "Bird1"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird2"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird3"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
+        BirdRepository birdRepository= BirdRepository.getInstance();
+        Task<QuerySnapshot> birds =  birdRepository.getmFirestore().collection("birds").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                birdList.add(document.toObject(Bird.class));
+                                Log.d("Firestore/fetched", document.getId() + " => " + document.toObject(Bird.class));
+                            }
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Log.d("Firestore/fetched", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        Log.d("check order", "just checking order ");
 
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
+
 
     }
 

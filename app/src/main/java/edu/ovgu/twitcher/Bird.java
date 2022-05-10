@@ -26,6 +26,7 @@ public class Bird {
         this.category = category;
         this.notes = notes;
     }
+    public Bird(){}
 
     private String wikiLink,category,notes;
 

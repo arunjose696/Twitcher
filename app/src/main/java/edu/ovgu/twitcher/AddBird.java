@@ -83,7 +83,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                 Toast.makeText(this, "Submit button clicked", Toast.LENGTH_SHORT).show();
                 SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
                 try {
-                    birdRepo.saveBird(new Bird(7, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  "wikiLink",  "category",  "notes"));
+                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  "wikiLink",  "category",  "notes"));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

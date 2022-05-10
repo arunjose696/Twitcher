@@ -29,10 +29,46 @@ import edu.ovgu.twitcher.R;
 public class BirdRepository {
     private Bird bird;
     private FirebaseFirestore mFirestore;
+
+    public FirebaseFirestore getmFirestore() {
+        return mFirestore;
+    }
+
+    public void setmFirestore(FirebaseFirestore mFirestore) {
+        this.mFirestore = mFirestore;
+    }
+
+    public static FirebaseStorage getStorage() {
+        return storage;
+    }
+
+    public static void setStorage(FirebaseStorage storage) {
+        BirdRepository.storage = storage;
+    }
+
+    public static StorageReference getStorageRef() {
+        return storageRef;
+    }
+
+    public static void setStorageRef(StorageReference storageRef) {
+        BirdRepository.storageRef = storageRef;
+    }
+
+    public static void setInstance(BirdRepository instance) {
+        BirdRepository.instance = instance;
+    }
+
     private static FirebaseStorage storage;
     private static StorageReference storageRef;
     private static BirdRepository instance = null;
 
+    public Bird getBird() {
+        return bird;
+    }
+
+    public void setBird(Bird bird) {
+        this.bird = bird;
+    }
 
     private BirdRepository(){
         mFirestore = FirebaseFirestore.getInstance();
@@ -52,7 +88,6 @@ public class BirdRepository {
         //code for uploading image
         ImageView imageView=AddBird.imageView;
         StorageReference mountainsRef = storageRef.child(fileName+".jpg");
-
 
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache();
@@ -84,9 +119,6 @@ public class BirdRepository {
     }
     public String saveBird(Bird bird)  {
         DocumentReference document;
-
-
-
         mFirestore.collection(Bird.COLLECTION)
                 .add(bird)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -94,8 +126,6 @@ public class BirdRepository {
                     public void onSuccess(DocumentReference docRef) {
                         uploadImage(bird.getBirdName()+docRef.getId());
                         Log.d("BirdRepo", "DocumentSnapshot added with ID: " + docRef.getId());
-
-
 
                     }
                 })
