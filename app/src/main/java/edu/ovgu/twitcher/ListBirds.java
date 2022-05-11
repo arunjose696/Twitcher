@@ -1,73 +1,54 @@
 package edu.ovgu.twitcher;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.ramotion.foldingcell.FoldingCell;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListBirds extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
-    List<Bird>birdList;
-    Adapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_birds);
 
-        initData();
-        initRecyclerView();
-    }
+        // get our list view
+        ListView theListView = findViewById(R.id.mainListView);
 
-    private void initRecyclerView() {
-        recyclerView = findViewById(R.id.recycler_view);
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new Adapter(birdList);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        // prepare elements to display
+        final ArrayList<Bird> items = Bird.getBirds();
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+
+        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
+        final FoldingCellListAdapter adapter = new FoldingCellListAdapter(this, items);
+
+        // set elements to adapter
+        theListView.setAdapter(adapter);
+
+        // set on click event listener to list view
+        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view, int position) {
-
-                 Toast.makeText(ListBirds.this, position+ " is selected successfully", Toast.LENGTH_SHORT).show();
-
-                //handle click event
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                Toast.makeText(getApplicationContext(), "CLICKED", Toast.LENGTH_SHORT).show();
+                // toggle clicked cell state
+                ((FoldingCell) view).toggle(false);
+                // register in adapter that state for selected cell is toggled
+                adapter.registerToggle(pos);
             }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-
+        });
 
     }
 
-    private void initData() {
-        birdList = new ArrayList<>();
-        birdList.add(new Bird(R.drawable.twitcher, "Bird1"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird2"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird3"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
 
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
-        birdList.add(new Bird(R.drawable.twitcher, "Bird4"));
 
-    }
 
 }
