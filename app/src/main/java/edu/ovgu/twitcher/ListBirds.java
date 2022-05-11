@@ -1,5 +1,7 @@
 package edu.ovgu.twitcher;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,10 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,10 +80,36 @@ public class ListBirds extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                birdList.add(document.toObject(Bird.class));
-                                Log.d("Firestore/fetched", document.getId() + " => " + document.toObject(Bird.class));
+
+                                Bird tempBird=document.toObject(Bird.class);
+                                Log.d("Firestore/fetched", document.getId() + " => " + tempBird);
+
+                                try {
+                                    final File localFile= File.createTempFile(tempBird.getBirdName()+document.getId(),".jpg");
+                                    BirdRepository.getStorageRef().child(tempBird.getBirdName()+document.getId()+".jpg").getFile(localFile)
+                                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>(){
+                                                @Override
+                                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                                    tempBird.setBitmap(bitmap);
+                                                    birdList.add(tempBird);
+                                                    adapter.notifyDataSetChanged();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.i("Exception",e.getMessage());
+                                        }
+                                    });
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+
                             }
-                            adapter.notifyDataSetChanged();
+
                         } else {
                             Log.d("Firestore/fetched", "Error getting documents: ", task.getException());
                         }

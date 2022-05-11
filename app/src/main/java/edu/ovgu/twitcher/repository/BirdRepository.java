@@ -87,7 +87,7 @@ public class BirdRepository {
     public  String uploadImage(String fileName){
         //code for uploading image
         ImageView imageView=AddBird.imageView;
-        StorageReference mountainsRef = storageRef.child(fileName+".jpg");
+        StorageReference storageReference = storageRef.child(fileName+".jpg");
 
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache();
@@ -96,7 +96,7 @@ public class BirdRepository {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        UploadTask uploadTask = mountainsRef.putBytes(data);
+        UploadTask uploadTask = storageReference.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -105,7 +105,7 @@ public class BirdRepository {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         Uri downloadUrl = uri;

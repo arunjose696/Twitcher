@@ -1,5 +1,7 @@
 package edu.ovgu.twitcher;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 public class Bird {
@@ -14,9 +16,20 @@ public class Bird {
 
 
 
+
     private int imageView;
     private String birdName;
     private Date date;
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    private Bitmap bitmap;
 
     public Bird(int imageView, String birdName, Date date, String wikiLink, String category, String notes) {
         this.imageView = imageView;

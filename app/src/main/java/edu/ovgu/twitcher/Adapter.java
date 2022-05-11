@@ -1,5 +1,6 @@
 package edu.ovgu.twitcher;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
-        int img_resource = birdList.get(position).getImageView();
+        Bitmap img_resource = birdList.get(position).getBitmap();
         String name = birdList.get(position).getBirdName();
 
         holder.setData(img_resource, name);
@@ -47,8 +48,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             textView = itemView.findViewById(R.id.name);
         }
 
-        public void setData(int img_resource, String name) {
-            imageView.setImageResource(img_resource);
+        public void setData(Bitmap img_resource, String name) {
+            imageView.setImageBitmap(img_resource);
             textView.setText(name);
         }
     }
