@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -63,6 +65,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     ActivityResultLauncher<Intent> activityResultLauncher;
     private TextInputLayout dropdownLayout;
     private BirdRepository birdRepo;
+    private AutoCompleteTextView autoCompleteTextView;
 
 
 
@@ -126,6 +129,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         dateInput.setOnClickListener(this);
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
         additionalOptionLayout=findViewById(R.id.AdditionalOptions);
+        autoCompleteTextView=findViewById(R.id.autoComplete);
 
         cameraButton=findViewById(R.id.camera_btn);
         submitButton=findViewById(R.id.submit_btn);
@@ -136,6 +140,11 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         //Code for uploading image
         pd = new ProgressDialog(this);
         pd.setMessage("Uploading....");
+        String[] myStringArray = new String[]{"small", "big", "large"};
+
+
+        ArrayAdapter arrayAdapter=new ArrayAdapter(this,R.layout.dropdownlayout,myStringArray);
+        autoCompleteTextView.setAdapter(arrayAdapter);
 
         cameraButton.setOnClickListener(new View.OnClickListener()
         {
