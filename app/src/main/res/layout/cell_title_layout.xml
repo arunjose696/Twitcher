@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
 
-    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
-        
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:id="@+id/img_view"
             app:cardCornerRadius="70dp"
             android:layout_marginLeft="20dp">
 
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/twitcher"
                 android:id="@+id/img">
@@ -32,13 +30,12 @@
             android:layout_height="30dp"
             android:text="bird_name"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:id="@+id/name"
+            android:textSize="25sp"
+            android:id="@+id/title_name"
             android:layout_toRightOf="@+id/img_view"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="17dp">
+            android:layout_marginTop="20dp">
 
         </TextView>
 
-    </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
-</com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+</LinearLayout>
