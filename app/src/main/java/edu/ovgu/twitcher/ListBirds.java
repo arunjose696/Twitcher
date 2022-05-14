@@ -1,5 +1,7 @@
 package edu.ovgu.twitcher;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.os.SystemClock;
@@ -26,26 +28,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ovgu.twitcher.repository.BirdRepository;
+
 public class ListBirds extends AppCompatActivity {
+    private FoldingCellListAdapter adapter;
+    private List<Bird> birdList;
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_birds);
-
+        birdList=new ArrayList<Bird>();
         // get our list view
         ListView theListView = findViewById(R.id.mainListView);
 
-        // prepare elements to display
-        final ArrayList<Bird> items = Bird.getBirds();
+
+
 
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellListAdapter adapter = new FoldingCellListAdapter(this, items);
+        adapter = new FoldingCellListAdapter(this, birdList);
 
         // set elements to adapter
         theListView.setAdapter(adapter);
+        getBirds();
+
 
         // set on click event listener to list view
         theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,13 +66,15 @@ public class ListBirds extends AppCompatActivity {
                 // register in adapter that state for selected cell is toggled
                 adapter.registerToggle(pos);
             }
-        }));
+        });
 
 
     }
 
-    private void initData() {
-        birdList = new ArrayList<>();
+    public  void getBirds() {
+
+
+
         BirdRepository birdRepository= BirdRepository.getInstance();
         Task<QuerySnapshot> birds =  birdRepository.getmFirestore().collection("birds").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -85,6 +96,7 @@ public class ListBirds extends AppCompatActivity {
                                                     tempBird.setBitmap(bitmap);
                                                     birdList.add(tempBird);
                                                     adapter.notifyDataSetChanged();
+
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -107,7 +119,6 @@ public class ListBirds extends AppCompatActivity {
                     }
                 });
         Log.d("check order", "just checking order ");
-
 
 
     }

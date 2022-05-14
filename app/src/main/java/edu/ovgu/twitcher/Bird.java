@@ -1,8 +1,25 @@
 package edu.ovgu.twitcher;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+
+import edu.ovgu.twitcher.repository.BirdRepository;
 
 public class Bird {
     private String id;
@@ -102,6 +119,8 @@ public class Bird {
     public String getBirdName(){
         return birdName;
     }
+
+
 
 
 }
