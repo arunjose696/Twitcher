@@ -125,7 +125,7 @@
                 app:startIconDrawable="@drawable/notes">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/category"
+                    android:id="@+id/notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="5"
@@ -152,6 +152,7 @@
                 app:startIconDrawable="@drawable/link">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/wikiLinkInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -171,6 +172,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:id="@+id/categoryInput"
+
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

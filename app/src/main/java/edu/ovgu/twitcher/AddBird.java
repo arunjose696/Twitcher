@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -63,6 +64,9 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     ActivityResultLauncher<Intent> activityResultLauncher;
     private TextInputLayout dropdownLayout;
     private BirdRepository birdRepo;
+    private TextInputEditText notes,wikiLink;
+    private AutoCompleteTextView category;
+
 
 
 
@@ -83,7 +87,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                 Toast.makeText(this, "Submit button clicked", Toast.LENGTH_SHORT).show();
                 SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
                 try {
-                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  "wikiLink",  "category",  "notes"));
+                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  wikiLink.getText().toString(),  category.getText().toString(),  notes.getText().toString()));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -130,6 +134,10 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         cameraButton=findViewById(R.id.camera_btn);
         submitButton=findViewById(R.id.submit_btn);
         dropdownLayout=findViewById(R.id.list_dropdown);
+        notes=findViewById(R.id.notes);
+        category=findViewById(R.id.categoryInput);
+        wikiLink=findViewById(R.id.wikiLinkInput);
+
         birdRepo=BirdRepository.getInstance();
 
         Log.i("Yeah" , "999999999999999999999999999999999");
