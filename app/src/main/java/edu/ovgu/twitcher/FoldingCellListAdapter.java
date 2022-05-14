@@ -36,6 +36,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird> {
             cell = (FoldingCell) vi.inflate(R.layout.cell, parent, false);
             // binding view parts to view holder
             viewHolder.image = cell.findViewById(R.id.img);
+            viewHolder.thumbNailImage = cell.findViewById(R.id.imgThumbNail);
             viewHolder.time = cell.findViewById(R.id.time_value);
             viewHolder.date = cell.findViewById(R.id.date_value);
             viewHolder.contentName = cell.findViewById(R.id.name);
@@ -66,6 +67,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird> {
         viewHolder.date.setText(formatter4.format(item.getDate()));
         viewHolder.wiki.setText(item.getWikiLink());
         viewHolder.image.setImageBitmap(item.getBitmap());
+        viewHolder.thumbNailImage.setImageBitmap(item.getBitmap());
         viewHolder.category.setText(String.valueOf(item.getCategory()));
         viewHolder.notes.setText(item.getNotes());
 
@@ -91,7 +93,8 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird> {
 
     // View lookup cache
     private static class ViewHolder {
-        ImageView image;
+
+        ImageView image,thumbNailImage;
         TextView contentName;
         TextView titleName;
         TextView date;

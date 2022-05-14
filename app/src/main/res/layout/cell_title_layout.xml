@@ -18,8 +18,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/twitcher"
-                android:id="@+id/img">
+                android:id="@+id/imgThumbNail">
 
             </ImageView>
 
