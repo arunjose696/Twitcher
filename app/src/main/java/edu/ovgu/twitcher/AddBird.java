@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -37,7 +38,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
+import edu.ovgu.twitcher.repository.BirdRepository;
 
 public class AddBird extends AppCompatActivity  implements View.OnClickListener
 {
@@ -48,22 +54,27 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private TextInputEditText inputName;
     private Switch additionalOptionsSwitch;
     private TextInputLayout additionalOptionLayout;
+    private FloatingActionButton submitButton;
 
-    private ImageView imageView;
+    public static ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST = 1888;
     private static final int CAMERA_ACTION_CODE=1;
     private FloatingActionButton cameraButton;
     ActivityResultLauncher<Intent> activityResultLauncher;
     private TextInputLayout dropdownLayout;
+    private BirdRepository birdRepo;
+    private TextInputEditText notes,wikiLink;
+    private AutoCompleteTextView category;
+
+
 
 
     //add bird code
 
     ProgressDialog pd;
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReferenceFromUrl("gs://twitcher-9291b.appspot.com");
+
 
 
     @Override
@@ -72,6 +83,16 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
             case R.id.dateInput:
                 Toast.makeText(this, "there I am", Toast.LENGTH_SHORT).show();
                 openDatePicker(view);
+            case R.id.submit_btn:
+                Toast.makeText(this, "Submit button clicked", Toast.LENGTH_SHORT).show();
+                SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
+                try {
+                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  wikiLink.getText().toString(),  category.getText().toString(),  notes.getText().toString()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
 
 
         }
@@ -111,8 +132,13 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         additionalOptionLayout=findViewById(R.id.AdditionalOptions);
 
         cameraButton=findViewById(R.id.camera_btn);
-
+        submitButton=findViewById(R.id.submit_btn);
         dropdownLayout=findViewById(R.id.list_dropdown);
+        notes=findViewById(R.id.notes);
+        category=findViewById(R.id.categoryInput);
+        wikiLink=findViewById(R.id.wikiLinkInput);
+
+        birdRepo=BirdRepository.getInstance();
 
         Log.i("Yeah" , "999999999999999999999999999999999");
         //Code for uploading image
@@ -136,6 +162,8 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
             }
         });
 
+        submitButton.setOnClickListener(this);
+
 
 
         additionalOptionsSwitch.setOnCheckedChangeListener(
@@ -146,35 +174,6 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                         Log.i("Yeah" , "Is Not Selected");
 
                         //code for uploading image
-                        StorageReference mountainsRef = storageRef.child(inputName.getText()+".jpg");
-
-
-                        imageView.setDrawingCacheEnabled(true);
-                        imageView.buildDrawingCache();
-                        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        byte[] data = baos.toByteArray();
-
-                        UploadTask uploadTask = mountainsRef.putBytes(data);
-                        uploadTask.addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle unsuccessful uploads
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        Uri downloadUrl = uri;
-                                        Log.i("download:URL",downloadUrl.toString());
-                                        //Do what you want with the url
-                                    }});
-                                Toast.makeText(AddBird.this,"Image uploaded successfully",Toast.LENGTH_SHORT).show();;
-                            }
-                        });
 
 
 

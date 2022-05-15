@@ -14,12 +14,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.add_btn:
-                setContentView(R.layout.add_bird);
                 Intent intent= new Intent(MainActivity.this,AddBird.class);
                 startActivity(intent);
                 break;
             case R.id.button2:
-                setContentView(R.layout.list_birds);
                 Intent intent2= new Intent(MainActivity.this,ListBirds.class);
                 startActivity(intent2);
 
