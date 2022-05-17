@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
 
     tools:context=".AddBird">
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:backgroundTint="#A042F3"
+        android:layout_margin="16dp"
+        app:borderWidth="0dp"
+        android:contentDescription="@string/bottom_sheet_behavior"
+        android:visibility="gone"
+        app:srcCompat="@drawable/back"/>
 
 
     <androidx.core.widget.NestedScrollView
@@ -18,16 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/back_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|left"
-                android:backgroundTint="#A042F3"
-                android:layout_margin="16dp"
-                app:borderWidth="0dp"
-                android:contentDescription="@string/bottom_sheet_behavior"
-                app:srcCompat="@drawable/back"/>
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
@@ -199,6 +200,7 @@
                 android:backgroundTint="#A042F3"
                 android:contentDescription="@string/bottom_sheet_behavior"
                 app:srcCompat="@drawable/done"/>
+
 
 
 
