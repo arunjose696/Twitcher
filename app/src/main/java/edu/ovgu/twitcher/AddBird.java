@@ -82,11 +82,10 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.dateInput:
-                Toast.makeText(this, "there I am", Toast.LENGTH_SHORT).show();
                 openDatePicker(view);
                 break;
             case R.id.submit_btn:
-                Toast.makeText(this, "Submit button clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Bird Added", Toast.LENGTH_SHORT).show();
                 SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
                 try {
                     birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  wikiLink.getText().toString(),  category.getText().toString(),  notes.getText().toString()));

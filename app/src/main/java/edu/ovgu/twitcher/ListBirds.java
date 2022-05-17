@@ -60,7 +60,7 @@ public class ListBirds extends AppCompatActivity {
         theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Toast.makeText(getApplicationContext(), "CLICKED", Toast.LENGTH_SHORT).show();
+
                 // toggle clicked cell state
                 ((FoldingCell) view).toggle(true);
                 // register in adapter that state for selected cell is toggled
