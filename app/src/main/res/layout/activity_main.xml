@@ -8,17 +8,18 @@
         android:layout_height="fill_parent"
         tools:context=".MainActivity"
         android:background="@drawable/birds">
+
     <Button
-        app:icon="@drawable/ic_baseline_add_24"
         android:id="@+id/add_btn"
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        android:layout_width="124dip"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_width="124dip"
         android:layout_marginTop="5dip"
         android:text="Add a bird"
         android:textSize="10sp"
-        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-        android:layout_centerHorizontal="true"/>
+        android:backgroundTint="#998FB3DC"
+        app:icon="@drawable/ic_baseline_add_24" />
 
     <Button
         android:id="@+id/button2"
@@ -29,6 +30,8 @@
         android:layout_marginTop="5dip"
         android:text="View all bird"
         android:textSize="10sp"
+        android:backgroundTint="#998FB3DC"
+
         style="@style/Widget.Material3.Button.ElevatedButton.Icon"
         android:layout_below="@+id/add_btn"/>
 

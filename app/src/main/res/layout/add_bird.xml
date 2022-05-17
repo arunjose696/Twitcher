@@ -21,12 +21,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:boxBackgroundColor="#998FB3DC">
 
 
 
@@ -88,7 +90,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:hint="Bird Name"
-                app:boxBackgroundColor="#908FB3DC"
+                app:boxBackgroundColor="#998FB3DC"
                 app:startIconDrawable="@drawable/bunny">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -140,7 +142,7 @@
                 android:layout_margin="6dp"
                 android:hint="Wiki Link"
                 app:boxBackgroundColor="#908FB3DC"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:startIconDrawable="@drawable/link">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -158,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
-                android:visibility="visible"
+                android:visibility="gone"
 
                 android:hint="Category"
                 app:boxBackgroundColor="#908FB3DC"

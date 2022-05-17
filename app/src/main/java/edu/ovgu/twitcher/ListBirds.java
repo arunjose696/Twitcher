@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -38,7 +39,9 @@ public class ListBirds extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.list_birds);
         birdList=new ArrayList<Bird>();
         // get our list view
