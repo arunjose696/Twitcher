@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/birds"
     tools:context=".AddBird">
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back_btn"
@@ -21,12 +21,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:boxBackgroundColor="#998FB3DC">
 
 
 
@@ -88,6 +90,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:hint="Bird Name"
+                app:boxBackgroundColor="#998FB3DC"
                 app:startIconDrawable="@drawable/bunny">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -95,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
+
                     android:singleLine="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,6 +110,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:hint="Date spotted"
+                app:boxBackgroundColor="#908FB3DC"
                 app:startIconDrawable="@drawable/date">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -121,8 +126,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Switch
+
                 android:id="@+id/AdditionalOptionsSwitch"
                 android:layout_width="wrap_content"
+                android:shadowColor="@color/black"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end">
             </Switch>
@@ -134,6 +141,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:hint="Wiki Link"
+                app:boxBackgroundColor="#908FB3DC"
                 android:visibility="gone"
                 app:startIconDrawable="@drawable/link">
 
@@ -153,7 +161,9 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:visibility="gone"
+
                 android:hint="Category"
+                app:boxBackgroundColor="#908FB3DC"
                 app:startIconDrawable="@drawable/category">
 
                 <AutoCompleteTextView
@@ -175,6 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
+                app:boxBackgroundColor="#908FB3DC"
                 android:hint="Notes"
                 app:startIconDrawable="@drawable/notes">
 
