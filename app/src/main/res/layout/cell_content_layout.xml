@@ -65,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:textStyle="bold"
                 android:text="Date and Time" />
 
             <TextView
