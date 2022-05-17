@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -144,6 +145,10 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         //Code for uploading image
         pd = new ProgressDialog(this);
         pd.setMessage("Uploading....");
+
+        String[] myStringArray = new String[]{"small", "big", "large"};
+        ArrayAdapter arrayAdapter=new ArrayAdapter(this,R.layout.dropdownlayout,myStringArray);
+        category.setAdapter(arrayAdapter);
 
         cameraButton.setOnClickListener(new View.OnClickListener()
         {
