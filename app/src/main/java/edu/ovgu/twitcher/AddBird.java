@@ -84,6 +84,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
             case R.id.dateInput:
                 Toast.makeText(this, "there I am", Toast.LENGTH_SHORT).show();
                 openDatePicker(view);
+                break;
             case R.id.submit_btn:
                 Toast.makeText(this, "Submit button clicked", Toast.LENGTH_SHORT).show();
                 SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
@@ -92,6 +93,10 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                Intent intent= new Intent(AddBird.this,MainActivity.class);
+                startActivity(intent);
+                break;
+
 
 
 
@@ -175,21 +180,15 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        Classifier.classify(imageView,getApplicationContext(), inputName);
-                        Log.i("Yeah" , "Is Not Selected");
-
-                        //code for uploading image
-
-
-
-
 
 
                         if(additionalOptionLayout.getVisibility()== View.GONE){
+                            wikiLink.setText("https://en.wikipedia.org/wiki/"+inputName.getText().toString().replaceAll("\\s+",""));
                             additionalOptionLayout.setVisibility(View.VISIBLE);
                             dropdownLayout.setVisibility(View.VISIBLE);
                         }
                         else{
+                            wikiLink.setText("");
                             additionalOptionLayout.setVisibility(View.GONE);
                             dropdownLayout.setVisibility(View.GONE);
                         }
