@@ -31,12 +31,10 @@ public class Bird {
     public static final String FIELD_wikiLink = "wikiLink";
     public static final String FIELD_time = "time";
 
-
-
-
     private int imageView;
     private String birdName;
     private Date date;
+    private Date time;
 
     public Bitmap getBitmap() {
         return bitmap;
@@ -48,10 +46,11 @@ public class Bird {
 
     private Bitmap bitmap;
 
-    public Bird(int imageView, String birdName, Date date, String wikiLink, String category, String notes) {
+    public Bird(int imageView, String birdName, Date date, Date time, String wikiLink, String category, String notes) {
         this.imageView = imageView;
         this.birdName = birdName;
         this.date = date;
+        this.time = time;
         this.wikiLink = wikiLink;
         this.category = category;
         this.notes = notes;
@@ -74,6 +73,14 @@ public class Bird {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getWikiLink() {
