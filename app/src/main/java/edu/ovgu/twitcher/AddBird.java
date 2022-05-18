@@ -83,7 +83,10 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                     e.printStackTrace();
                 }
                 Intent intent= new Intent(AddBird.this,MainActivity.class);
+
+
                 startActivity(intent);
+                finish();
                 break;
         }
     }
