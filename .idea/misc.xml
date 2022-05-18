@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable/bg.xml" value="0.1135" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1135" />
+        <entry key="app/src/main/res/font/font_regular.xml" value="0.182129115006413" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/add_bird.xml" value="0.2887294216969185" />
         <entry key="app/src/main/res/layout/bird_details.xml" value="0.29243266353142366" />
@@ -30,6 +31,7 @@
         <entry key="app/src/main/res/layout/cell_title_layout.xml" value="0.14920906370243694" />
         <entry key="app/src/main/res/layout/content.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_birds.xml" value="0.29243266353142366" />
+        <entry key="app/src/main/res/layout/splashscreen.xml" value="0.29243266353142366" />
       </map>
     </option>
   </component>
