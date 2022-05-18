@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import com.ramotion.foldingcell.FoldingCell;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 
@@ -61,10 +62,10 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird> {
         // bind data from selected element to view through view holder
         viewHolder.contentName.setText(item.getBirdName());
         viewHolder.titleName.setText(item.getBirdName());
-        viewHolder.time.setText("time");
         SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
-
+        SimpleDateFormat fmt=new SimpleDateFormat("HH:mm");
         viewHolder.date.setText(formatter4.format(item.getDate()));
+        viewHolder.time.setText(fmt.format(item.getTime()));
         viewHolder.wiki.setText(item.getWikiLink());
         viewHolder.image.setImageBitmap(item.getBitmap());
         viewHolder.thumbNailImage.setImageBitmap(item.getBitmap());

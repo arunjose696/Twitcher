@@ -4,42 +4,34 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
+import java.text.BreakIterator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,6 +49,8 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private Switch additionalOptionsSwitch;
     private TextInputLayout additionalOptionLayout;
     private FloatingActionButton submitButton;
+    private TimePickerDialog timePickerDialog;
+    private TextInputEditText timeInput;
 
     public static ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
@@ -68,16 +62,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private BirdRepository birdRepo;
     private TextInputEditText notes,wikiLink;
     private AutoCompleteTextView category;
-
-
-
-
-    //add bird code
-
     ProgressDialog pd;
-
-
-
 
     @Override
     public void onClick(View view) {
@@ -85,22 +70,21 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
             case R.id.dateInput:
                 openDatePicker(view);
                 break;
+            case R.id.timeInput:
+                openTimePicker(view);
+                break;
             case R.id.submit_btn:
                 Toast.makeText(this, "Bird Added", Toast.LENGTH_SHORT).show();
                 SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
+                SimpleDateFormat fmt=new SimpleDateFormat("HH:mm");
                 try {
-                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  wikiLink.getText().toString(),  category.getText().toString(),  notes.getText().toString()));
+                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  fmt.parse(timeInput.getText().toString()),  wikiLink.getText().toString(),  category.getText().toString(),  notes.getText().toString()));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 Intent intent= new Intent(AddBird.this,MainActivity.class);
                 startActivity(intent);
                 break;
-
-
-
-
-
         }
     }
 
@@ -139,6 +123,11 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         dateInput.setOnClickListener(this);
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);
         additionalOptionLayout=findViewById(R.id.AdditionalOptions);
+
+        initTimePicker();
+        timeInput = findViewById(R.id.timeInput);
+        timeInput.setText(getTodaysTime());
+        timeInput.setOnClickListener(this);
 
         cameraButton=findViewById(R.id.camera_btn);
         submitButton=findViewById(R.id.submit_btn);
@@ -215,12 +204,9 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                 }
             }
         });
-
-
     }
 
-    private void initDatePicker()
-    {
+    private void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
         {
             @Override
@@ -241,10 +227,29 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
 
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+    }
+
+    private void initTimePicker() {
+        boolean is24HView = true;
+        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                timeInput.setText(hourOfDay + ":" + minute );
+
+            }
+        };
+        Calendar c = Calendar.getInstance();
+        int lastSelectedHour = c.get(Calendar.HOUR_OF_DAY);
+        int lastSelectedMinute = c.get(Calendar.MINUTE);
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        // Create TimePickerDialog:
+        timePickerDialog = new TimePickerDialog(this, style, timeSetListener, lastSelectedHour, lastSelectedMinute, is24HView);
 
     }
-    public String getTodaysDate()
-    {
+
+    public String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -253,14 +258,18 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         return makeDateString(day, month, year);
     }
 
+    private String getTodaysTime() {
+        Date time = Calendar.getInstance().getTime();
+        int hour = time.getHours();
+        int minutes = time.getMinutes();
+        return hour + ":" + minutes;
+    }
 
-    public String makeDateString(int day, int month, int year)
-    {
+    public String makeDateString(int day, int month, int year) {
         return getMonthFormat(month) + " " + day + " " + year;
     }
 
-    public String getMonthFormat(int month)
-    {
+    public String getMonthFormat(int month) {
         if(month == 1)
             return "JAN";
         if(month == 2)
@@ -290,10 +299,11 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         return "JAN";
     }
 
-    public void openDatePicker(View view)
-    {
+    public void openDatePicker(View view) {
         datePickerDialog.show();
     }
+
+    public void openTimePicker(View view) { timePickerDialog.show(); }
 
 }
 
