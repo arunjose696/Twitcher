@@ -1,0 +1,8 @@
+TECHNOLOGY USED:
+Android Studio, JAVA.
+We have chosen Android 10.0(Q) SDK as SDK for development.
+Minimum SDK Android 7.0 for backward support.
+Emulator using Pixel 5 API 29.
+Material Design for UI components. 
+Firebase Database
+Cloud Storage, Storage to store images
