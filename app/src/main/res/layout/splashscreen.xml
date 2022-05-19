@@ -5,32 +5,32 @@
     android:gravity="center"
     android:background="@drawable/birds">
 
+    <TextView
+        android:id="@+id/logo_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Twitcher"
+        android:textColor="#A042F3"
+        android:typeface="serif"
+        android:textSize="50dp" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerInParent="true"
+        android:layout_below="@id/logo_id"
         android:scaleType="fitCenter"
         android:src="@drawable/twitcher" />
 
     <TextView
-        android:id="@+id/logo_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_below="@id/logo"
-        android:layout_centerInParent="true"
-        android:text="Twitcher"
+        android:text="A bird tracking app"
         android:textColor="@color/white"
-        android:typeface="serif"
-        android:textSize="50dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/logo_id"
-        android:text="A bird finding app"
-        android:textColor="#A042F3"
         android:textSize="20dp" />
 
 
