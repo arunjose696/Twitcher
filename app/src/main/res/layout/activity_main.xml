@@ -28,7 +28,7 @@
         android:layout_centerInParent="true"
         android:layout_width="200dip"
         android:layout_marginTop="5dip"
-        android:text="View all bird"
+        android:text="View all birds"
         android:textSize="20sp"
         android:backgroundTint="#998FB3DC"
 
