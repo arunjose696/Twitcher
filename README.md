@@ -37,3 +37,13 @@ or viewing all the birds list.
 5.	Material Design for UI components. 
 6.	Firebase Database
 7.	Cloud Storage, Storage to store images.
+
+
+# User Stories
+
+![image](https://user-images.githubusercontent.com/104303875/169717413-cebd70cc-7309-41b4-8b60-79cf573720a8.png)
+![image](https://user-images.githubusercontent.com/104303875/169717418-f2c4c6df-ba9b-4384-a080-fe58b8ff3922.png)
+![image](https://user-images.githubusercontent.com/104303875/169717427-03e88f32-3278-4bd0-8583-83d39a57bf4c.png)
+
+
+
