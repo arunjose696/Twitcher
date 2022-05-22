@@ -57,6 +57,9 @@ We've also been putting in a lot of effort to improve the user experience and im
 
 Let's begin our adventure with meeting some of the most beautiful birds from throughout the world.
 
+# Application Logo:
+
+![Logo](https://user-images.githubusercontent.com/104304610/169717867-23252af7-f77f-4e6b-8f35-376a6759a70f.png)
 
 
 
