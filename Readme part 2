@@ -1,8 +1,0 @@
-HOW IT WORKS:
-A friendly user interface for beginners, Firstly after start opening the app there are two tabs or feature to “Add a Bird” (For Bird Watcher) and the second is for viewing all the birds list.
-By Clicking on the “Add a Bird” tab here the user will add the information about the bird like its name, description (about family, geographic region, species etc.)
-Under this feature we can take the Bird Photo by clicking on the Camera Feature which  is classified using AI Model to get the bird’s name which user can change.
-Whenever I take picture by using the Machine Learning Model it automatically picks the bird’s name.
-By Clicking on the tab “ View All Bird” here the user will find or view the list of the birds with their name, picture, date, time, category, description.
-Under the “View All Bird” tab there is an addition feature of “Wiki Link” where the user knows more about the bird.
-A Toggle Bar for Wikipedia Link where I can know more about the bird (its species, family, scientific name, geographical region etc).
