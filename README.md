@@ -2,11 +2,7 @@
 BIRD – TRACKING APP
 PROJECT PROBLEM STATEMENT:
 Tracking birds via Android App. A mobile application to track bird occurrences e.g., when and where particular bird has been observed. This app fetches the real time information about the bird like its name, appearance of bird and description about the bird. It helps the bird lover and adventurers to track where this particular bird has been observed. This helps in discovering a new world of birds for the bird’s lover. Explore birds near you and wherever you go. 
-![Twitcher App picture 1](https://user-images.githubusercontent.com/104304610/169592894-1b39076f-ae1e-45d9-8f56-7c2dac4acf02.jpeg)
-![Twitcher App picture 2](https://user-images.githubusercontent.com/104304610/169592911-ef6120c0-89e0-4fa1-8e18-03cb9f3487f5.jpeg)
-![Twitcher App picture 3](https://user-images.githubusercontent.com/104303875/169714980-3879e73e-dfcd-40a8-aac5-7b9dfef316b1.jpeg)
-![Twitcher App picture 4](https://user-images.githubusercontent.com/104303875/169715001-ef160176-748a-4c78-9034-33e52bbcb391.jpeg)
-![Twitcher App picture 5](https://user-images.githubusercontent.com/104303875/169715004-b013d323-88b8-42e1-a075-0083d0028b65.jpeg)
+![image](https://user-images.githubusercontent.com/40291569/169718155-48051568-e598-45f9-9104-6bd689c93591.png)
 
 # HOW IT WORKS:
 1. A friendly user interface for beginners, Firstly after start opening the app there are two tabs or feature to “Add a Bird” (For Bird Watcher) and the second is f!
