@@ -31,4 +31,4 @@ TECHNOLOGY USED:
 4.	Emulator using Pixel 5 API 29.
 5.	Material Design for UI components. 
 6.	Firebase Database
-7.	Cloud Storage, Storage to store images
+7.	Cloud Storage, Storage to store images.
