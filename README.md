@@ -1,4 +1,4 @@
-TWITCHER
+# TWITCHER
 BIRD – TRACKING APP
 PROJECT PROBLEM STATEMENT:
 Tracking birds via Android App. A mobile application to track bird occurrences e.g., when and where particular bird has been observed. This app fetches the real time information about the bird like its name, appearance of bird and description about the bird. It helps the bird lover and adventurers to track where this particular bird has been observed. This helps in discovering a new world of birds for the bird’s lover. Explore birds near you and wherever you go. 
