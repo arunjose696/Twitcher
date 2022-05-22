@@ -49,6 +49,17 @@ or viewing all the birds list.
 
 ![image](https://user-images.githubusercontent.com/104304610/169717549-3ea7f667-28c4-43bf-a721-3c2842d39cd4.png)
 
+# Twitcher's Motivation for the Application:
+
+Not sure what the birds' names are? Twitcher can help you identify unfamiliar birds and learn about wildlife in a fun and engaging way.
+
+We've also been putting in a lot of effort to improve the user experience and improve our recognition! Anyone who like birds is welcome to join us.
+
+Let's begin our adventure with meeting some of the most beautiful birds from throughout the world.
+
+
+
+
 
 
 
