@@ -34,43 +34,10 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
 
     private List<Bird> mItems;
     private List<Bird> mFiltered = new ArrayList<>();
-    private NewFilter mFilter = new NewFilter();
 
 
-    @Override
-    public Filter getFilter() {
-        return mFilter;
-    }
-
-    public class NewFilter extends Filter {
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-            mFiltered.clear();
-            final FilterResults results = new FilterResults();
-            if(charSequence.length() == 0){
-                mFiltered .addAll(mItems);
-            }else{
-                final String filterPattern =charSequence.toString().toLowerCase().trim();
-                for(Bird item: mItems) {
-                    if(item.getBirdName().toLowerCase().contains(charSequence.toString().toLowerCase())){ // replace this condition with actual you need
-                        mFiltered.add(item);
-                    }
-                }
-            }
-            results.values = mFiltered;
-            results.count = mFiltered.size();
-           Log.i("filter",results.values.toString());
-           return results;
 
 
-        }
-
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            notifyDataSetChanged();
-
-        }
-    }
 
     public FoldingCellListAdapter(Context context, List<Bird> objects) {
         super(context, 0, objects);
