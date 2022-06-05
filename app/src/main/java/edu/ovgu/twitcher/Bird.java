@@ -127,6 +127,11 @@ public class Bird {
         return birdName;
     }
 
+    @Override
+    public String toString() {
+        return this.birdName;
+    }
+
 
 
 

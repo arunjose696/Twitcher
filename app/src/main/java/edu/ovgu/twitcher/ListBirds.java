@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.os.SystemClock;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import com.ramotion.foldingcell.FoldingCell;
 
@@ -35,13 +38,36 @@ public class ListBirds extends AppCompatActivity {
     private FoldingCellListAdapter adapter;
     private List<Bird> birdList;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        MenuItem menuItem= menu.findItem(R.id.action_search);
+        SearchView searchView=(SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Search for birds");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.list_birds);
         birdList=new ArrayList<Bird>();
         // get our list view
@@ -98,6 +124,7 @@ public class ListBirds extends AppCompatActivity {
                                                     Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                                                     tempBird.setBitmap(bitmap);
                                                     birdList.add(tempBird);
+                                                    adapter.setmItems(birdList);
                                                     adapter.notifyDataSetChanged();
 
                                                 }
