@@ -1,10 +1,13 @@
 package edu.ovgu.twitcher;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,16 +16,37 @@ import androidx.annotation.NonNull;
 import com.ramotion.foldingcell.FoldingCell;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 
-public class FoldingCellListAdapter extends ArrayAdapter<Bird> {
+public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filterable {
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
+
+    public List<Bird> getmItems() {
+        return mItems;
+    }
+
+    public void setmItems(List<Bird> mItems) {
+        this.mItems = mItems;
+    }
+
+    private List<Bird> mItems;
+    private List<Bird> mFiltered = new ArrayList<>();
+
+
+
+
 
     public FoldingCellListAdapter(Context context, List<Bird> objects) {
         super(context, 0, objects);
     }
+
+
+
+
+
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
