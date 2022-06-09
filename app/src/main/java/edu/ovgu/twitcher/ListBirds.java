@@ -1,7 +1,9 @@
 package edu.ovgu.twitcher;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.os.SystemClock;
@@ -98,6 +100,15 @@ public class ListBirds extends AppCompatActivity {
         });
 
 
+    }
+
+    private void openLink(String link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        startActivity(browserIntent);
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     public  void getBirds() {

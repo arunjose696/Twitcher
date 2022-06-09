@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -95,14 +96,30 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
         viewHolder.thumbNailImage.setImageBitmap(item.getBitmap());
         viewHolder.category.setText(String.valueOf(item.getCategory()));
         viewHolder.notes.setText(item.getNotes());
+        setClickListener(viewHolder.wiki, position, parent);
 
         return cell;
     }
 
+    private void setClickListener(View view, final int position, final ViewGroup parent){
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this part is important, it lets ListView handle the clicks
+
+                Log.i("onclick", String.valueOf(position));
+
+            }
+        });
+    }
+
     // simple methods for register cell state changes
     public void registerToggle(int position) {
-        if (unfoldedIndexes.contains(position))
+        if (unfoldedIndexes.contains(position)) {
+            Log.i("position", String.valueOf(position));
             registerFold(position);
+        }
+
         else
             registerUnfold(position);
     }
