@@ -1,6 +1,8 @@
 package edu.ovgu.twitcher;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
 
     private List<Bird> mItems;
     private List<Bird> mFiltered = new ArrayList<>();
+    private Context mContext;
 
 
 
@@ -42,6 +45,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
 
     public FoldingCellListAdapter(Context context, List<Bird> objects) {
         super(context, 0, objects);
+        mContext = context;
     }
 
 
@@ -106,6 +110,25 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
             @Override
             public void onClick(View v) {
                 // this part is important, it lets ListView handle the clicks
+
+                String Url = "http://www.google.com";
+
+                if (v instanceof TextView) {
+                    TextView textView = (TextView) v;
+                    Log.i("test00000000000", ((TextView) v).getText().toString());
+                    Url=((TextView) v).getText().toString();
+
+                    // do what you want with textView
+                }
+
+
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Url));
+
+                mContext.startActivity(intent);
+
+
 
                 Log.i("onclick", String.valueOf(position));
 

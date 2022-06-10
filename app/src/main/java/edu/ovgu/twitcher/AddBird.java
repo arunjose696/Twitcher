@@ -178,7 +178,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
 
 
                         if(additionalOptionLayout.getVisibility()== View.GONE){
-                            wikiLink.setText("https://en.wikipedia.org/wiki/"+inputName.getText().toString().replaceAll("\\s+",""));
+                            wikiLink.setText("https://en.wikipedia.org/wiki/"+inputName.getText().toString());
                             additionalOptionLayout.setVisibility(View.VISIBLE);
                             dropdownLayout.setVisibility(View.VISIBLE);
                         }
