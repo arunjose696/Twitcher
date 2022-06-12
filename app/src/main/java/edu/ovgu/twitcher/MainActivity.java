@@ -12,6 +12,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button addBtn;
     Button listBtn;
+    Button IOClistBtn;
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -22,7 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button2:
                 Intent intent2= new Intent(MainActivity.this,ListBirds.class);
                 startActivity(intent2);
-
+            case R.id.ioc_button:
+                Intent intent3= new Intent(MainActivity.this,IOCBirdList.class);
+                startActivity(intent3);
 
         }
     }
@@ -38,5 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addBtn.setOnClickListener(this);
         listBtn=findViewById(R.id.button2);
         listBtn.setOnClickListener(this);
+        IOClistBtn=findViewById(R.id.ioc_button);
+        IOClistBtn.setOnClickListener(this);
     }
 }

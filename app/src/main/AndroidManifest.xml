@@ -22,6 +22,7 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".AddBird"></activity>
         <activity android:name=".ListBirds"></activity>
+        <activity android:name=".IOCBirdList"></activity>
     </application>
 
 </manifest>
