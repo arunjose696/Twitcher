@@ -149,6 +149,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         String[] myStringArray = new String[]{"small", "big", "large"};
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,R.layout.dropdownlayout,myStringArray);
         category.setAdapter(arrayAdapter);
+        category.setCompletionHint("Type custom category or select an option");
 
         cameraButton.setOnClickListener(new View.OnClickListener()
         {
