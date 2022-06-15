@@ -103,6 +103,12 @@ public class ListBirds extends AppCompatActivity {
 
     }
 
+    public void filterDate(ArrayList<Bird> birdList){
+        
+        adapter.setmItems(birdList);
+        adapter.notifyDataSetChanged();
+    }
+
 
 
     public  void getBirds() {

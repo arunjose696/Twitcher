@@ -23,9 +23,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button2:
                 Intent intent2= new Intent(MainActivity.this,ListBirds.class);
                 startActivity(intent2);
+                break;
             case R.id.ioc_button:
                 Intent intent3= new Intent(MainActivity.this,IOCBirdList.class);
                 startActivity(intent3);
+                break;
 
         }
     }
