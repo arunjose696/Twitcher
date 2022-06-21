@@ -1,10 +1,13 @@
 package edu.ovgu.twitcher;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.os.SystemClock;
 import android.view.Menu;
@@ -13,12 +16,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityCompat;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ramotion.foldingcell.FoldingCell;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,16 +35,46 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.ovgu.twitcher.repository.BirdRepository;
 
-public class ListBirds extends AppCompatActivity {
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.Workbook;
+
+public class ListBirds extends AppCompatActivity    implements View.OnClickListener{
     private FoldingCellListAdapter adapter;
     private List<Bird> birdList;
+    private FloatingActionButton exportButton;
+    private ProgressBar  progressBar;
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.export_btn:
+                try {
+
+                    export();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -68,13 +104,19 @@ public class ListBirds extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+
+
         //getSupportActionBar().hide();
         setContentView(R.layout.list_birds);
+        exportButton=findViewById(R.id.export_btn);
         birdList=new ArrayList<Bird>();
         // get our list view
         ListView theListView = findViewById(R.id.mainListView);
+        exportButton.setOnClickListener(this);
+        progressBar=findViewById(R.id.progressBar2);
 
 
 
@@ -109,12 +151,78 @@ public class ListBirds extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    public void export() throws IOException {
+        try {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PackageManager.PERMISSION_GRANTED);
+        File filePath = new File(getExternalFilesDir(null), "ExcelFile.xlsx");
+            progressBar.setVisibility(View.VISIBLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+            HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+            HSSFSheet hssfSheet = hssfWorkbook.createSheet("Programmer World");
+            for(int i=0;i<birdList.size();i++){
+
+            Bitmap bitmap= birdList.get(i).getBitmap();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] bytesImage = byteArrayOutputStream.toByteArray();
+
+            int intPictureIndex = hssfWorkbook.addPicture(bytesImage, Workbook.PICTURE_TYPE_JPEG);
+            CreationHelper creationHelper = hssfWorkbook.getCreationHelper();
+            int j=4*i+1;
+            HSSFRow hssfRow = hssfSheet.createRow(j-1);
+            HSSFCell hssfCell = hssfRow.createCell(0);
+            hssfCell.setCellValue("birdList.get(i).getBirdName()");
+            hssfCell.setCellValue(birdList.get(i).getBirdName());
+
+            hssfRow = hssfSheet.createRow(j);
+            hssfCell = hssfRow.createCell(2);
+            hssfCell.setCellValue(birdList.get(i).getDate().toString());
+            hssfRow = hssfSheet.createRow(j+1);
+            hssfCell = hssfRow.createCell(2);
+            hssfCell.setCellValue(birdList.get(i).getWikiLink());
+
+            ClientAnchor clientAnchor = creationHelper.createClientAnchor();
+            clientAnchor.setCol1(0);
+
+            clientAnchor.setRow1(j);
+            clientAnchor.setCol2(2);
+            clientAnchor.setRow2(j+2);
+
+
+        Drawing drawing = hssfSheet.createDrawingPatriarch();
+        drawing.createPicture(clientAnchor, intPictureIndex);
+        //hssfSheet.createRow(1).createCell(1);
+                }
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        hssfWorkbook.write(fileOutputStream);
+        if (fileOutputStream!=null){
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        }
+        hssfWorkbook.close();
+        progressBar.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        Toast.makeText(this, "Bird Data exported ", Toast.LENGTH_SHORT).show();
+    }
+        catch (Exception e){
+    }
+
+
+
+    }
+
+
+
+
+
 
 
     public  void getBirds() {
-
-
-
         BirdRepository birdRepository= BirdRepository.getInstance();
         Task<QuerySnapshot> birds =  birdRepository.getmFirestore().collection("birds").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -148,20 +256,13 @@ public class ListBirds extends AppCompatActivity {
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-
-
-
-
                             }
-
                         } else {
                             Log.d("Firestore/fetched", "Error getting documents: ", task.getException());
                         }
                     }
                 });
         Log.d("check order", "just checking order ");
-
-
     }
 
 }

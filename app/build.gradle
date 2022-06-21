@@ -49,6 +49,7 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
     implementation 'com.klinkerapps:link_builder:2.0.5'
+    implementation 'org.apache.poi:poi:3.17'
 //    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
 
 
