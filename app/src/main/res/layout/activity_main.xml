@@ -31,11 +31,21 @@
         android:text="View all birds"
         android:textSize="20sp"
         android:backgroundTint="#998FB3DC"
-
         style="@style/Widget.Material3.Button.ElevatedButton.Icon"
         android:layout_below="@+id/add_btn"/>
 
-
+    <Button
+        android:id="@+id/ioc_button"
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        android:layout_width="200dip"
+        android:layout_height="60dip"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dip"
+        android:backgroundTint="#998FB3DC"
+        android:text="IOC Bird List"
+        android:textSize="20sp"
+        app:icon="@drawable/ioc_bird_list"
+        android:layout_below="@+id/button2"/>
 
 
 </RelativeLayout>
