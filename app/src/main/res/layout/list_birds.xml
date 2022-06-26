@@ -10,7 +10,7 @@
         android:id="@+id/export_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
+        android:layout_gravity="bottom|right"
         app:borderWidth="0dp"
         android:backgroundTint="#A042F3"
         android:contentDescription="@string/bottom_sheet_behavior"
@@ -23,6 +23,18 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/date_range"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        app:borderWidth="0dp"
+        android:backgroundTint="#A042F3"
+        android:contentDescription="@string/bottom_sheet_behavior"
+        app:srcCompat="@drawable/date_range"/>
+
 
 <ListView
     android:background="#908FB3DC"

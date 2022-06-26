@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -23,7 +24,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.util.Pair;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ramotion.foldingcell.FoldingCell;
 
@@ -42,7 +46,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import edu.ovgu.twitcher.repository.BirdRepository;
 
@@ -57,9 +64,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class ListBirds extends AppCompatActivity    implements View.OnClickListener{
     private FoldingCellListAdapter adapter;
-    private List<Bird> birdList;
+    private List<Bird> birdList,birdListUnfltered;
     private FloatingActionButton exportButton;
     private ProgressBar  progressBar;
+    private FloatingActionButton filterDateButton;
+    private MaterialDatePicker dateRangePicker;
 
     @Override
     public void onClick(View view) {
@@ -72,6 +81,8 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
                     e.printStackTrace();
                 }
                 break;
+            case R.id.date_range:
+                dateRangePicker.show(getSupportFragmentManager(), "datePicker");
         }
 
     }
@@ -117,6 +128,25 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
         ListView theListView = findViewById(R.id.mainListView);
         exportButton.setOnClickListener(this);
         progressBar=findViewById(R.id.progressBar2);
+        filterDateButton=findViewById(R.id.date_range);
+        filterDateButton.setOnClickListener(this);
+        dateRangePicker= MaterialDatePicker.Builder.dateRangePicker().build();
+
+        dateRangePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long,Long>>() {
+            @Override
+            public void onPositiveButtonClick(Pair<Long,Long> selection) {
+                Date d1=new Date((Long)selection.first);
+                Date d2=new Date((Long)selection.second);
+                Log.i("selection first",d1.toString());
+                filterDate(d1,d2);
+
+
+
+
+
+            }
+        });
+
 
 
 
@@ -145,11 +175,7 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
     }
 
-    public void filterDate(ArrayList<Bird> birdList){
-        
-        adapter.setmItems(birdList);
-        adapter.notifyDataSetChanged();
-    }
+
 
     public void export() throws IOException {
         try {
@@ -212,6 +238,29 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
         catch (Exception e){
     }
 
+
+
+    }
+
+    public void filterDate(Date from, Date to){
+        if(birdListUnfltered==null){
+            birdListUnfltered=birdList.stream()
+                    .collect(Collectors.toList());
+        }
+        List<Bird> filteredBirds = birdListUnfltered.stream().filter(sub -> sub.getDate().after(from) && sub.getDate().before(to)).collect(Collectors.toList());
+        for (Bird bird:filteredBirds) {
+            Log.i("birdlist",bird.getBirdName());
+
+
+        }
+
+
+        birdList.clear();
+        birdList.addAll(filteredBirds);
+        adapter.notifyDataSetChanged();
+        Log.i("filteredBirds",filteredBirds.toString());
+        Log.i("birdListUnfltered",birdListUnfltered.toString());
+        Log.i("birdList",birdList.toString());
 
 
     }
