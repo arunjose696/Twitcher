@@ -7,8 +7,18 @@
         android:title="search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView">
-
-
     </item>
+
+    <item
+        android:id="@+id/filter_date"
+        android:title="Filter"/>
+
+    <item
+        android:id="@+id/export"
+        android:title="Export"/>
+
+    <item
+        android:id="@+id/delete"
+        android:title="Delete"/>
 
 </menu>

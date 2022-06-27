@@ -4,10 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button addBtn;
@@ -45,5 +50,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listBtn.setOnClickListener(this);
         IOClistBtn=findViewById(R.id.ioc_button);
         IOClistBtn.setOnClickListener(this);
+
+        TextView textView = findViewById(R.id.login);
+        String text = "Are you Admin? Click Here ";
+        SpannableString ss = new SpannableString(text);
+
+        // creating clickable span to be implemented as a link
+        ClickableSpan clickableSpan1 = new ClickableSpan() {
+            public void onClick(View v) {
+                Intent intent4= new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent4);
+            }
+        };
+
+        // setting the part of string to be act as a link
+        ss.setSpan(clickableSpan1, 15, 25, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        textView.setText(ss);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

@@ -21,10 +21,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.util.Pair;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -69,6 +71,8 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
     private ProgressBar  progressBar;
     private FloatingActionButton filterDateButton;
     private MaterialDatePicker dateRangePicker;
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     public void onClick(View view) {
@@ -112,6 +116,15 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
 
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,8 +160,12 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
             }
         });
 
+        drawerLayout = findViewById(R.id.my_drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
@@ -174,8 +191,6 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
 
     }
-
-
 
     public void export() throws IOException {
         try {
