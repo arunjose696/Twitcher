@@ -1,7 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
+    <group android:checkableBehavior="single"
+        android:id="@+id/user">
     <item
         android:id="@+id/filter_date"
         android:icon="@drawable/date_range"
@@ -11,10 +12,16 @@
         android:id="@+id/export"
         android:icon="@drawable/export"
         android:title="Export"/>
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/admin">
 
     <item
         android:id="@+id/delete"
         android:icon="@drawable/delete"
         android:title="Delete"/>
+
+    </group>
 
 </menu>

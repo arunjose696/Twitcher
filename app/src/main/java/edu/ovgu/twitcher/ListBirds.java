@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -73,6 +74,8 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
     private MaterialDatePicker dateRangePicker;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+    String adminUser;
+    NavigationView navigationView;
 
     @Override
     public void onClick(View view) {
@@ -81,7 +84,7 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
     }
 
     private void setNavigationViewListener() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -100,6 +103,7 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
             case R.id.filter_date:
                 dateRangePicker.show(getSupportFragmentManager(), "datePicker");
                 break;
+            case R.id.delete:
         }
         //close navigation drawer
         return true;
@@ -196,6 +200,13 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
         });
 
 
+        adminUser = getIntent().getStringExtra("SESSION_ID_user");
+
+        if(adminUser == null) {
+            navigationView.getMenu().setGroupVisible(R.id.admin,false);
+        } else if(adminUser.equals("admin")) {
+            navigationView.getMenu().setGroupVisible(R.id.admin,true);
+        }
     }
 
     public void export() throws IOException {

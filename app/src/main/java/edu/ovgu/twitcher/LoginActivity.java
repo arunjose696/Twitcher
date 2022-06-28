@@ -7,9 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -31,9 +29,11 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String user = username.getText().toString();
                 if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                     Intent intent= new Intent(LoginActivity.this, ListBirds.class);
+                    intent.putExtra("SESSION_ID_user", user);
                     startActivity(intent);
                     finish();
                 } else {
