@@ -89,23 +89,19 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
-
             case R.id.export: {
                 try {
-
                     export();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
-
-
             }
             case R.id.filter_date:
                 dateRangePicker.show(getSupportFragmentManager(), "datePicker");
+                break;
         }
         //close navigation drawer
-
         return true;
     }
 
@@ -123,7 +119,6 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 adapter.getFilter().filter(newText);
                 return false;
             }
@@ -166,10 +161,6 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
                 Date d2=new Date((Long)selection.second);
                 Log.i("selection first",d1.toString());
                 filterDate(d1,d2);
-
-
-
-
 
             }
         });
