@@ -4,10 +4,12 @@
 
     <item
         android:id="@+id/filter_date"
+        android:icon="@drawable/date_range"
         android:title="Filter"/>
 
     <item
         android:id="@+id/export"
+        android:icon="@drawable/export"
         android:title="Export"/>
 
     <item

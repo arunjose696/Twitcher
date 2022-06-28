@@ -31,6 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.ramotion.foldingcell.FoldingCell;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,20 +65,32 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Workbook;
 
-public class ListBirds extends AppCompatActivity    implements View.OnClickListener{
+public class ListBirds extends AppCompatActivity    implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
     private FoldingCellListAdapter adapter;
     private List<Bird> birdList,birdListUnfltered;
-    private FloatingActionButton exportButton;
+
     private ProgressBar  progressBar;
-    private FloatingActionButton filterDateButton;
     private MaterialDatePicker dateRangePicker;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
-            case R.id.export_btn:
+
+
+    }
+
+    private void setNavigationViewListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        switch (item.getItemId()) {
+
+            case R.id.export: {
                 try {
 
                     export();
@@ -85,10 +98,15 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
                     e.printStackTrace();
                 }
                 break;
-            case R.id.date_range:
+
+
+            }
+            case R.id.filter_date:
                 dateRangePicker.show(getSupportFragmentManager(), "datePicker");
         }
+        //close navigation drawer
 
+        return true;
     }
 
     @Override
@@ -135,14 +153,10 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
         //getSupportActionBar().hide();
         setContentView(R.layout.list_birds);
-        exportButton=findViewById(R.id.export_btn);
         birdList=new ArrayList<Bird>();
         // get our list view
         ListView theListView = findViewById(R.id.mainListView);
-        exportButton.setOnClickListener(this);
         progressBar=findViewById(R.id.progressBar2);
-        filterDateButton=findViewById(R.id.date_range);
-        filterDateButton.setOnClickListener(this);
         dateRangePicker= MaterialDatePicker.Builder.dateRangePicker().build();
 
         dateRangePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long,Long>>() {
@@ -175,6 +189,7 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
         // set elements to adapter
         theListView.setAdapter(adapter);
         getBirds();
+        setNavigationViewListener();
 
 
         // set on click event listener to list view
