@@ -1,40 +1,31 @@
 package edu.ovgu.twitcher;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
-import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.util.Pair;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.ramotion.foldingcell.FoldingCell;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,21 +33,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.BreakIterator;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import edu.ovgu.twitcher.repository.BirdRepository;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -104,8 +89,12 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
                 dateRangePicker.show(getSupportFragmentManager(), "datePicker");
                 break;
             case R.id.delete:
+                delete();
+                break;
         }
         //close navigation drawer
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.my_drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -297,11 +286,21 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
     }
 
+    public void delete() {
+        Toast.makeText(this, "in delete ", Toast.LENGTH_SHORT).show();
+        BirdRepository birdRepo= BirdRepository.getInstance();
+        Task<QuerySnapshot> birds =  birdRepo.getmFirestore().collection("birds").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
 
-
-
-
-
+                        } else {
+                            Log.d("Firestore/fetched", "Error deleting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
 
     public  void getBirds() {
         BirdRepository birdRepository= BirdRepository.getInstance();
