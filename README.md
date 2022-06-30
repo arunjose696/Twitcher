@@ -57,10 +57,14 @@ Let's begin our adventure with meeting some of the most beautiful birds from thr
 
 ![Logo](https://user-images.githubusercontent.com/104304610/169717867-23252af7-f77f-4e6b-8f35-376a6759a70f.png)
 
-Updated User stories:
+# Updated User stories:
 
 ![image](https://user-images.githubusercontent.com/104304610/176650701-4e97d22c-eccb-4edf-bfca-36c4875f8a30.png)
 ![image](https://user-images.githubusercontent.com/104304610/176650745-dafed6de-a041-4ad0-9c76-10a61738da83.png)
+
+# New Activity Diagram with Additional Features:
+
+![image](https://user-images.githubusercontent.com/104303875/176652672-c6b76a26-9bab-4ee1-9457-2c28c22f40e1.png)
 
 
 
