@@ -1,9 +1,11 @@
 package edu.ovgu.twitcher;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -37,7 +40,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -286,17 +292,30 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void delete() {
-        Toast.makeText(this, "in delete ", Toast.LENGTH_SHORT).show();
+        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDateMinus6Months = currentDate.minusMonths(6);
+        Date date = Date.from(currentDateMinus6Months.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        System.out.println("currentDateMinus6Months : " + date);
         BirdRepository birdRepo= BirdRepository.getInstance();
         Task<QuerySnapshot> birds =  birdRepo.getmFirestore().collection("birds").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Bird tempList = document.toObject(Bird.class);
+                                Log.d("Firestore delete data", document.getId() + " => " + tempList+ " => " + tempList.getDate().before(date));
+                                if(tempList.getDate().before(date)) {
+                                    document.getReference().delete();
+                                }
+                                Intent intent= new Intent(ListBirds.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         } else {
-                            Log.d("Firestore/fetched", "Error deleting documents: ", task.getException());
+                            Log.d("Firestore delete data", "Error deleting documents: ", task.getException());
                         }
                     }
                 });
