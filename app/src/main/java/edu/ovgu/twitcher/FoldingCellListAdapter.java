@@ -66,6 +66,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
             cell = (FoldingCell) vi.inflate(R.layout.cell, parent, false);
             // binding view parts to view holder
             viewHolder.image = cell.findViewById(R.id.img);
+            viewHolder.location=cell.findViewById(R.id.Location_value);
             viewHolder.thumbNailImage = cell.findViewById(R.id.imgThumbNail);
             viewHolder.time = cell.findViewById(R.id.time_value);
             viewHolder.date = cell.findViewById(R.id.date_value);
@@ -91,6 +92,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
         // bind data from selected element to view through view holder
         viewHolder.contentName.setText(item.getBirdName());
         viewHolder.titleName.setText(item.getBirdName());
+
         SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
         SimpleDateFormat fmt=new SimpleDateFormat("HH:mm");
         viewHolder.date.setText(formatter4.format(item.getDate()));
@@ -100,6 +102,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
         viewHolder.thumbNailImage.setImageBitmap(item.getBitmap());
         viewHolder.category.setText(String.valueOf(item.getCategory()));
         viewHolder.notes.setText(item.getNotes());
+        viewHolder.location.setText(item.getLocation());
         setClickListener(viewHolder.wiki, position, parent);
 
         return cell;
@@ -167,5 +170,6 @@ public class FoldingCellListAdapter extends ArrayAdapter<Bird>  implements Filte
         TextView wiki;
         TextView category;
         TextView notes;
+        TextView location;
     }
 }
