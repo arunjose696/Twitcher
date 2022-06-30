@@ -147,6 +147,28 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:hint="Location"
+                app:boxBackgroundColor="#908FB3DC"
+                app:startIconDrawable="@drawable/time">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+                    android:text="Lat 52.13,Lon 11.61" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Switch
 
                 android:id="@+id/AdditionalOptionsSwitch"
@@ -155,6 +177,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end">
             </Switch>
+
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
