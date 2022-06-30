@@ -66,6 +66,14 @@ Let's begin our adventure with meeting some of the most beautiful birds from thr
 
 ![image](https://user-images.githubusercontent.com/104303875/176652672-c6b76a26-9bab-4ee1-9457-2c28c22f40e1.png)
 
+# Additional Features:
+
+Search Bar.
+Clickable Wikilink.
+Customizable Category Option.
+Wikilink Populates the right wiki page for the bird.
+
+
 
 
 
