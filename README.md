@@ -68,10 +68,13 @@ Let's begin our adventure with meeting some of the most beautiful birds from thr
 
 # Additional Features:
 
-Search Bar.
-Clickable Wikilink.
-Customizable Category Option.
-Wikilink Populates the right wiki page for the bird.
+1. Search Bar.
+
+2. Clickable Wikilink.
+
+3. Customizable Category Option.
+
+4. Wikilink Populates the right wiki page for the bird.
 
 
 
