@@ -46,6 +46,7 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
     private DatePickerDialog datePickerDialog;
     private TextInputEditText dateInput;
     private TextInputEditText inputName;
+    private TextInputEditText location;
     private Switch additionalOptionsSwitch;
     private TextInputLayout additionalOptionLayout;
     private FloatingActionButton submitButton;
@@ -75,10 +76,13 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
                 break;
             case R.id.submit_btn:
                 Toast.makeText(this, "Bird Added", Toast.LENGTH_SHORT).show();
+                Log.d("submitbuttonclicked", "submitbuttonclicked " );
                 SimpleDateFormat formatter4=new SimpleDateFormat("MMM dd yyyy");
                 SimpleDateFormat fmt=new SimpleDateFormat("HH:mm");
                 try {
-                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  fmt.parse(timeInput.getText().toString()),  wikiLink.getText().toString(),  category.getText().toString(),  notes.getText().toString()));
+                    Log.d("submitbuttonclicked1", "submitbuttonclicked " );
+                    birdRepo.saveBird(new Bird(R.drawable.twitcher, inputName.getText().toString(), formatter4.parse(dateInput.getText().toString()),  fmt.parse(timeInput.getText().toString()),  wikiLink.getText().toString(),  category.getText().toString(),  notes.getText().toString(),location.getText().toString()));
+                    Log.d("submitbuttonclicked1", "submitbuttonclicked " );
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -121,7 +125,9 @@ public class AddBird extends AppCompatActivity  implements View.OnClickListener
         initDatePicker();
         dateInput = findViewById(R.id.dateInput);
         inputName=findViewById(R.id.inputName);
+        location=findViewById(R.id.Location);
         imageView=findViewById(R.id.BirdImage);
+
         dateInput.setText(getTodaysDate());
         dateInput.setOnClickListener(this);
         additionalOptionsSwitch=findViewById(R.id.AdditionalOptionsSwitch);

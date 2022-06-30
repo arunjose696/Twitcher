@@ -142,10 +142,34 @@
                 android:id="@+id/wiki_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/wiki"
-                android:layout_alignStart="@id/wiki"
-                android:layout_below="@id/wiki"
-                android:text="Wiki_Value"
+                android:layout_alignLeft="@id/Location"
+                android:layout_alignStart="@id/Location"
+                android:layout_below="@id/Location"
+                android:text="Wiki Link"
+                android:textColor="@color/mainTextColor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold"
+                android:text="location" />
+
+
+
+            <TextView
+                android:id="@+id/Location_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/Location"
+                android:layout_alignStart="@id/Location"
+                android:layout_below="@id/Location"
+                android:text="location_value"
                 android:textColor="@color/mainTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />

@@ -118,14 +118,16 @@ public class BirdRepository {
         return "something";
     }
     public String saveBird(Bird bird)  {
+        Log.d("BirdRepo", "DocumentSnapshot added with ID: " );
         DocumentReference document;
         mFirestore.collection(Bird.COLLECTION)
                 .add(bird)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference docRef) {
-                        uploadImage(bird.getBirdName()+docRef.getId());
                         Log.d("BirdRepo", "DocumentSnapshot added with ID: " + docRef.getId());
+                        uploadImage(bird.getBirdName()+docRef.getId());
+
 
                     }
                 })

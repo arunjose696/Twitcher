@@ -29,7 +29,7 @@ public class Bird {
 
     private Bitmap bitmap;
 
-    public Bird(int imageView, String birdName, Date date, Date time, String wikiLink, String category, String notes) {
+    public Bird(int imageView, String birdName, Date date, Date time, String wikiLink, String category, String notes,String location) {
         this.imageView = imageView;
         this.birdName = birdName;
         this.date = date;
@@ -37,10 +37,11 @@ public class Bird {
         this.wikiLink = wikiLink;
         this.category = category;
         this.notes = notes;
+        this.location=location;
     }
     public Bird(){}
 
-    private String wikiLink,category,notes;
+    private String wikiLink,category,notes,location;
 
     public void setImageView(int imageView) {
         this.imageView = imageView;
@@ -116,6 +117,11 @@ public class Bird {
     }
 
 
+    public String getLocation() {
+        return location;
+    }
 
-
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
