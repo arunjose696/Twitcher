@@ -5,14 +5,21 @@ Tracking birds via Android App. A mobile application to track bird occurrences e
 ![image](https://user-images.githubusercontent.com/40291569/169718155-48051568-e598-45f9-9104-6bd689c93591.png)
 
 # HOW IT WORKS:
-1. A friendly user interface for beginners, Firstly after start opening the app there are two tabs or feature to “Add a Bird” (For Bird Watcher) and the second is f!
-or viewing all the birds list.
-2. By Clicking on the “Add a Bird” tab here the user will add the information about the bird like its name, description (about family, geographic region, species etc.)
-3. Under this feature we can take the Bird Photo by clicking on the Camera Feature which  is classified using AI Model to get the bird’s name which user can change.
-4.	Whenever I take picture by using the Machine Learning Model it automatically picks the bird’s name.
-5.	By Clicking on the tab “ View All Bird” here the user will find or view the list of the birds with their name, picture, date, time, category, description.
-6.	Under the “View All Bird” tab there is an addition feature of “Wiki Link” where the user knows more about the bird.
-7.	A Toggle Bar for Wikipedia Link where I can know more about the bird (its species, family, scientific name, geographical region etc).
+1. A friendly user interface for beginners, Firstly after start opening the app there are two tabs or feature to “Add a Bird” (For Bird Watcher) and the second is for viewing all the birds list.
+2. By Clicking on the “Add a Bird” tab here the user will add the information about the bird like its name, description (about family, geographic region, species, location etc.)
+3. Under this feature we can take the Bird Photo by clicking on the Camera Feature which is classified using AI Model to get the bird’s name which user can change.
+4.	Whenever we take picture by using the Machine Learning Model it automatically picks the bird’s name.
+5.	Based on the bird name, the wiki link field automatically populates the link.
+7.	The category field is a custom field where user can either select from the options given(small, big, large) or give user's choice for it.
+8.	By Clicking on the tab “ View all Birds” here the user will find or view the list of the birds saved in the database.
+9.	On clicking on each bird names, it gives all the details such as name, picture, date, time, category, description, wiki link, location.
+10.	The “Wiki Link” present under the “View all Birds” tab is clickable, which directs to the respective wikipedia page.
+11.	Under the “View all Birds” tab, search bar is provided for user to view only the birds by giving the names.
+12.	Also a navigation drawer is provided with filter by date and export options.
+13.	On clicking Export, user can extract the data locally to ones phone.
+14.	On clicking Filter options, a provision to select FROM and TO date to filter the birds list is provided.
+15.	On the main page, Admin user is given the privilage to login and delete the data from the database that is older than 6 months.
+16.	On the main page, there is another activity called IOC Bird List, which lists the Bird name, sub species and sub region from an open access resource of the international community.
 
 # FEATURES:
 1.	No sign-ups
@@ -20,10 +27,15 @@ or viewing all the birds list.
 3.	Beginner Friendly
 4.	For novice to advanced birders, ease of use in discovering a bird by image or search text tool.
 5.	Bird Photo is classified using AI Model to get the bird’s name which user can change.
-6.	Home Page where users can check location of the birds.
-7.	Birds’ checklist
-8.	Tflite for Bird Name Prediction 
-9.	Cloud Storage to Store Images
+6.	Tflite for Bird Name Prediction.
+9.	Cloud Storage to Store Images.
+10.	List the bird details with name, location, date, time, catetory, addtional notes, wiki link.
+11.	Clickable wiki link.
+12.	Serach bar.
+13.	Filter by date.
+14.	Export data.
+15.	Delete the list from database.
+16.	View IOC bird list.
 
 # TECHNOLOGY USED:
 1.	Android Studio, JAVA.
@@ -33,7 +45,8 @@ or viewing all the birds list.
 5.	Material Design for UI components. 
 6.	Firebase Database
 7.	Cloud Storage, Storage to store images.
-
+8.	MaterialIO for Navigational drawer.
+9.	Foldingcell.
 
 # User Stories
 
@@ -56,27 +69,6 @@ Let's begin our adventure with meeting some of the most beautiful birds from thr
 # Application Logo:
 
 ![Logo](https://user-images.githubusercontent.com/104304610/169717867-23252af7-f77f-4e6b-8f35-376a6759a70f.png)
-
-# Updated User stories:
-
-![image](https://user-images.githubusercontent.com/104304610/176650701-4e97d22c-eccb-4edf-bfca-36c4875f8a30.png)
-![image](https://user-images.githubusercontent.com/104304610/176650745-dafed6de-a041-4ad0-9c76-10a61738da83.png)
-
-# New Activity Diagram with Additional Features:
-
-![image](https://user-images.githubusercontent.com/104303875/176652672-c6b76a26-9bab-4ee1-9457-2c28c22f40e1.png)
-
-# Additional Features:
-
-1. Search Bar.
-
-2. Clickable Wikilink.
-
-3. Customizable Category Option.
-
-4. Wikilink Populates the right wiki page for the bird.
-
-
 
 
 
