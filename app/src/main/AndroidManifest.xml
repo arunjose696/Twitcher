@@ -27,6 +27,7 @@
         <activity android:name=".AddBird"></activity>
         <activity android:name=".ListBirds"></activity>
         <activity android:name=".IOCBirdList"></activity>
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

@@ -6,15 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="@drawable/birds">
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/export_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        app:borderWidth="0dp"
-        android:backgroundTint="#A042F3"
-        android:contentDescription="@string/bottom_sheet_behavior"
-        app:srcCompat="@drawable/export"/>
+
+
     <ProgressBar
         android:layout_centerInParent="true"
         android:id="@+id/progressBar2"
@@ -25,36 +18,57 @@
         android:layout_height="wrap_content" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/date_range"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        app:borderWidth="0dp"
-        android:backgroundTint="#A042F3"
-        android:contentDescription="@string/bottom_sheet_behavior"
-        app:srcCompat="@drawable/date_range"/>
-
-
-<ListView
-    android:background="#908FB3DC"
-    android:id="@+id/mainListView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="10dp"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:scrollbars="none"
-    tools:context=".ListBirds">
 
 
 
-</ListView>
+
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/my_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        tools:ignore="HardcodedText">
+
+        <ListView
+            android:background="#908FB3DC"
+            android:id="@+id/mainListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:scrollbars="none"
+            tools:context=".ListBirds">
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+        <!--this the navigation view which draws
+            and shows the navigation drawer-->
+        <!--include the menu created in the menu folder-->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/navigationmenu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
 
 </FrameLayout>
 

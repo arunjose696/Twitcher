@@ -5,32 +5,30 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
-import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.util.Pair;
-
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.ramotion.foldingcell.FoldingCell;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,21 +36,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.BreakIterator;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import edu.ovgu.twitcher.repository.BirdRepository;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -62,29 +57,51 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Workbook;
 
-public class ListBirds extends AppCompatActivity    implements View.OnClickListener{
+public class ListBirds extends AppCompatActivity    implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
     private FoldingCellListAdapter adapter;
     private List<Bird> birdList,birdListUnfltered;
-    private FloatingActionButton exportButton;
+
     private ProgressBar  progressBar;
-    private FloatingActionButton filterDateButton;
     private MaterialDatePicker dateRangePicker;
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
+    String adminUser;
+    NavigationView navigationView;
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
-            case R.id.export_btn:
-                try {
 
+
+    }
+
+    private void setNavigationViewListener() {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        switch (item.getItemId()) {
+            case R.id.export: {
+                try {
                     export();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
-            case R.id.date_range:
+            }
+            case R.id.filter_date:
                 dateRangePicker.show(getSupportFragmentManager(), "datePicker");
+                break;
+            case R.id.delete:
+                delete();
+                break;
         }
-
+        //close navigation drawer
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.my_drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override
@@ -101,7 +118,6 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 adapter.getFilter().filter(newText);
                 return false;
             }
@@ -112,6 +128,15 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
 
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,14 +147,10 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
         //getSupportActionBar().hide();
         setContentView(R.layout.list_birds);
-        exportButton=findViewById(R.id.export_btn);
         birdList=new ArrayList<Bird>();
         // get our list view
         ListView theListView = findViewById(R.id.mainListView);
-        exportButton.setOnClickListener(this);
         progressBar=findViewById(R.id.progressBar2);
-        filterDateButton=findViewById(R.id.date_range);
-        filterDateButton.setOnClickListener(this);
         dateRangePicker= MaterialDatePicker.Builder.dateRangePicker().build();
 
         dateRangePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long,Long>>() {
@@ -140,15 +161,15 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
                 Log.i("selection first",d1.toString());
                 filterDate(d1,d2);
 
-
-
-
-
             }
         });
 
+        drawerLayout = findViewById(R.id.my_drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
@@ -158,6 +179,7 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
         // set elements to adapter
         theListView.setAdapter(adapter);
         getBirds();
+        setNavigationViewListener();
 
 
         // set on click event listener to list view
@@ -173,9 +195,14 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
         });
 
 
+        adminUser = getIntent().getStringExtra("SESSION_ID_user");
+
+        if(adminUser == null) {
+            navigationView.getMenu().setGroupVisible(R.id.admin,false);
+        } else if(adminUser.equals("admin")) {
+            navigationView.getMenu().setGroupVisible(R.id.admin,true);
+        }
     }
-
-
 
     public void export() throws IOException {
         try {
@@ -265,11 +292,34 @@ public class ListBirds extends AppCompatActivity    implements View.OnClickListe
 
     }
 
-
-
-
-
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void delete() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDateMinus6Months = currentDate.minusMonths(6);
+        Date date = Date.from(currentDateMinus6Months.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        System.out.println("currentDateMinus6Months : " + date);
+        BirdRepository birdRepo= BirdRepository.getInstance();
+        Task<QuerySnapshot> birds =  birdRepo.getmFirestore().collection("birds").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Bird tempList = document.toObject(Bird.class);
+                                Log.d("Firestore delete data", document.getId() + " => " + tempList+ " => " + tempList.getDate().before(date));
+                                if(tempList.getDate().before(date)) {
+                                    document.getReference().delete();
+                                }
+                                Intent intent= new Intent(ListBirds.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        } else {
+                            Log.d("Firestore delete data", "Error deleting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
 
     public  void getBirds() {
         BirdRepository birdRepository= BirdRepository.getInstance();

@@ -9,6 +9,15 @@
         tools:context=".MainActivity"
         android:background="@drawable/birds">
 
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you Admin? Click Here"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:textSize="20dp" />
+
     <Button
         android:id="@+id/add_btn"
         style="@style/Widget.Material3.Button.ElevatedButton.Icon"
@@ -19,7 +28,8 @@
         android:backgroundTint="#998FB3DC"
         android:text="Add a bird"
         android:textSize="20sp"
-        app:icon="@drawable/ic_baseline_add_24" />
+        app:icon="@drawable/ic_baseline_add_24"
+        android:layout_below="@+id/login" />
 
     <Button
         android:id="@+id/button2"
