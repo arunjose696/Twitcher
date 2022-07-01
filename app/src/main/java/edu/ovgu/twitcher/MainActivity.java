@@ -31,10 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent2= new Intent(MainActivity.this,ListBirds.class);
                 startActivity(intent2);
                 break;
-            case R.id.ioc_button:
-                Intent intent3= new Intent(MainActivity.this,IOCBirdList.class);
-                startActivity(intent3);
-                break;
 
         }
     }
@@ -50,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addBtn.setOnClickListener(this);
         listBtn=findViewById(R.id.button2);
         listBtn.setOnClickListener(this);
-        IOClistBtn=findViewById(R.id.ioc_button);
-        IOClistBtn.setOnClickListener(this);
 
         TextView textView = findViewById(R.id.login);
         String text = "Are you Admin? Click Here ";
