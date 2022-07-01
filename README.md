@@ -19,7 +19,6 @@ Tracking birds via Android App. A mobile application to track bird occurrences e
 13.	On clicking Export, user can extract the data locally to ones phone.
 14.	On clicking Filter options, a provision to select FROM and TO date to filter the birds list is provided.
 15.	On the main page, Admin user is given the privilage to login and delete the data from the database that is older than 6 months.
-16.	On the main page, there is another activity called IOC Bird List, which lists the Bird name, sub species and sub region from an open access resource of the international community.
 
 # FEATURES:
 1.	No sign-ups
@@ -35,7 +34,6 @@ Tracking birds via Android App. A mobile application to track bird occurrences e
 13.	Filter by date.
 14.	Export data.
 15.	Delete the list from database.
-16.	View IOC bird list.
 
 # TECHNOLOGY USED:
 1.	Android Studio, JAVA.
