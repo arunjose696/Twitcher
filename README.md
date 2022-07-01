@@ -2,9 +2,10 @@
 BIRD – TRACKING APP
 PROJECT PROBLEM STATEMENT:
 Tracking birds via Android App. A mobile application to track bird occurrences e.g., when and where particular bird has been observed. This app fetches the real time information about the bird like its name, appearance of bird and description about the bird. It helps the bird lover and adventurers to track where this particular bird has been observed. This helps in discovering a new world of birds for the bird’s lover. Explore birds near you and wherever you go. 
-![image](https://user-images.githubusercontent.com/104304610/176953172-e4fba729-9fd3-45da-920b-29903ea0019c.png)
-![image](https://user-images.githubusercontent.com/104304610/176953220-a900afcc-9e3e-40bc-b87f-627b7392cc0f.png)
-![image](https://user-images.githubusercontent.com/104304610/176953288-498efed3-660b-4295-a678-130f1a55c510.png)
+
+![image](https://user-images.githubusercontent.com/104304610/176974730-75967e3b-f5bb-4cbb-8ac2-b4df90656eec.png)
+![image](https://user-images.githubusercontent.com/104304610/176974766-dbb2d924-3a75-4288-8961-6005e197ce49.png)
+![image](https://user-images.githubusercontent.com/104304610/176974828-50aad914-44c8-48ca-b752-e61eb6b21ff8.png)
 
 
 # HOW IT WORKS:
