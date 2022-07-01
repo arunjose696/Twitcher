@@ -51,9 +51,9 @@ Tracking birds via Android App. A mobile application to track bird occurrences e
 
 # User Stories
 
-![image](https://user-images.githubusercontent.com/104303875/169717413-cebd70cc-7309-41b4-8b60-79cf573720a8.png)
-![image](https://user-images.githubusercontent.com/104303875/169717418-f2c4c6df-ba9b-4384-a080-fe58b8ff3922.png)
-![image](https://user-images.githubusercontent.com/104303875/169717427-03e88f32-3278-4bd0-8583-83d39a57bf4c.png)
+![image](https://user-images.githubusercontent.com/104304610/176954159-ff0a4bc2-19fc-4c22-a049-ad5ca001edef.png)
+![image](https://user-images.githubusercontent.com/104304610/176954293-bbc3aeb7-abdd-4590-b81f-cb5fef2b30bc.png)
+
 
 # Activity Diagram:
 
