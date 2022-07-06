@@ -7,6 +7,9 @@ Tracking birds via Android App. A mobile application to track bird occurrences e
 ![image](https://user-images.githubusercontent.com/104304610/176974766-dbb2d924-3a75-4288-8961-6005e197ce49.png)
 ![image](https://user-images.githubusercontent.com/104304610/176974828-50aad914-44c8-48ca-b752-e61eb6b21ff8.png)
 
+You can try out the app by downloading apk 
+
+https://github.com/arunjose696/Twitcher/tree/master/app
 
 # HOW IT WORKS:
 1. A friendly user interface for beginners, Firstly after start opening the app there are two tabs or feature to “Add a Bird” (For Bird Watcher) and the second is for viewing all the birds list.
